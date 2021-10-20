@@ -1,0 +1,85 @@
+.detail-tour-title {
+  position: absolute;
+  width: 833px;
+  height: 66px;
+  left: 460px;
+  top: 120px;
+}
+
+.detail-tour-title small {
+  color: #a8a8a8;
+}
+
+.detail-tour {
+  position: absolute;
+  top: 100px;
+  background-color: #f1f1f1;
+  height: 1600px;
+  overflow: hidden;
+}
+
+.img-container {
+  position: absolute;
+  top: 250px;
+  left: 160px;
+}
+
+.container .image-1 {
+  width: 1018px;
+  height: 361px;
+}
+
+.container .image-2 {
+  width: 328px;
+}
+.container .image-3 {
+  width: 328px;
+}
+.container .image-4 {
+  width: 328px;
+}
+
+.img img {
+  width: 24px;
+  height: 35px;
+}
+
+.img-container small {
+  color: #a8a8a8;
+  font-weight: 500;
+}
+
+.description-container {
+  position: absolute;
+  width: 1053px;
+  height: 85px;
+  left: 450px;
+  top: 1024px;
+}
+
+.description-container p {
+  color: #a8a8a8;
+}
+
+.book-container img {
+  width: 100%;
+}
+
+.book-container {
+  position: absolute;
+  width: 1063px;
+  left: 449px;
+  top: 1235px;
+}
+
+.hibiscus-img {
+  position: absolute;
+  left: 93.77%;
+  right: -3.31%;
+  top: 33.32%;
+  bottom: 53.5%;
+}
+
+/* .palm-img {
+
+} */

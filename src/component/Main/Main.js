@@ -19,7 +19,7 @@ function Main() {
           {Data.map((el) => {
             let path = `assets/${el.image}`;
             return (
-              <div className="container rounded mt-3">
+              <div className="container content-container rounded mt-3">
                 <img src={path} alt="japan"></img>
                 <h3>
                   {el.day}D/{el.nigth}N {el.destination}

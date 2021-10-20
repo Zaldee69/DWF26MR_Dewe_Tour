@@ -2,11 +2,12 @@ import React from "react";
 import ReactDOM from "react-dom";
 import "bootstrap/dist/css/bootstrap.min.css";
 
-import Home from "./home_page/Home";
+import Home from "./routes/Home";
+import DetailTrip from "./routes/detail_trips/DetailTrip";
 
 ReactDOM.render(
   <React.StrictMode>
-    <Home />
+    <DetailTrip />
   </React.StrictMode>,
   document.getElementById("root")
 );
