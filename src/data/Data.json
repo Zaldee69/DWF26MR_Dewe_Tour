@@ -1,0 +1,66 @@
+[
+  {
+    "day": 6,
+    "nigth": 4,
+    "destination": "Fun Tassie Vacation",
+    "country": "Australia",
+    "price": "12,000,000",
+    "image": "aussie.png"
+  },
+  {
+    "day": 6,
+    "nigth": 4,
+    "destination": "Exciting Summer",
+    "country": "South Korea",
+    "price": "12,000,000",
+    "image": "jakarta.png"
+  },
+  {
+    "day": 6,
+    "nigth": 4,
+    "destination": "WonderFull Autumn",
+    "country": "Japan",
+    "price": "12,000,000",
+    "image": "japan1.png"
+  },
+  {
+    "day": 6,
+    "nigth": 4,
+    "destination": "Labuan Bajo Delight",
+    "country": "Indonesia",
+    "price": "12,000,000",
+    "image": "labuan.png"
+  },
+  {
+    "day": 6,
+    "nigth": 4,
+    "destination": "Overland Jakarta",
+    "country": "Indonesia",
+    "price": "12,000,000",
+    "image": "jakarta.png"
+  },
+  {
+    "day": 6,
+    "nigth": 4,
+    "destination": "Magic Tokyo Fun",
+    "country": "Australia",
+    "price": "12,000,000",
+    "image": "japan.png"
+  },
+  {
+    "day": 6,
+    "nigth": 4,
+    "destination": "Magic Tokyo Fun",
+    "country": "Australia",
+    "price": "12,000,000",
+    "image": "labuan.png"
+  },
+  {
+    "day": 6,
+    "nigth": 4,
+    "destination": "Magic Tokyo Fun",
+    "country": "Australia",
+    "price": "12,000,000",
+    "image": "japan1.png"
+  }
+]

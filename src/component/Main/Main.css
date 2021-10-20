@@ -1,0 +1,65 @@
+.main-container {
+  background-color: #f1f1f1;
+  height: 1400px;
+  position: absolute;
+  top: 530px;
+  z-index: -999999;
+}
+
+.hibiscus-img {
+  position: absolute;
+  left: 93.77%;
+  right: -6.95%;
+  bottom: 90.19%;
+}
+
+.palm-img {
+  position: absolute;
+  left: -1%;
+  top: 24%;
+  /* right: 91.04%;  */
+}
+
+.container-group {
+  top: 413px;
+  position: relative;
+  width: 80%;
+}
+
+.container {
+  background-color: #ffffff;
+  width: 320px;
+  height: auto;
+}
+
+.container img {
+  width: 100%;
+  padding-top: 10px;
+}
+
+.container.price-container {
+  width: 100%;
+}
+
+.container h3 {
+  padding-top: 10px;
+  font-size: 20px;
+}
+
+.price-container p {
+  color: #ffaf00;
+  font-weight: 600;
+}
+
+.price-container small {
+  color: #878787;
+  font-weight: 600;
+}
+
+.group-title {
+  position: absolute;
+  top: 350px;
+  left: 835px;
+  font-size: 43px;
+  font-weight: 600;
+}
