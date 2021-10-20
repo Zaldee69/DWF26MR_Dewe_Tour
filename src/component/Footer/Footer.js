@@ -9,7 +9,7 @@ function Footer() {
           Copyright @ 2020 Dewe Tour - Muhammad Rizaldy - NIS. All Rights
           reserved
         </p>
-        <img alt="leaf" src="assets/leaf1.png"></img>
+        <img alt="leaf" src="assets/leaf.png"></img>
       </div>
     </div>
   );
