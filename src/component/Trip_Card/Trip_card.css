@@ -1,5 +1,6 @@
 .payment-content-container {
   background-color: #ffff;
+  position: relative;
 }
 
 .payment-content-container small {
@@ -22,10 +23,8 @@
 
 .payment-image {
   position: absolute;
-
-  left: 1365.52px;
-  top: 326px;
-
+  left: 1065.52px;
+  top: 126px;
   box-sizing: border-box;
 }
 

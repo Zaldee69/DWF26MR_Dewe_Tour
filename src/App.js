@@ -1,8 +1,9 @@
 import React from "react";
+import DetailTrip from "./pages/detail_trips/DetailTrip";
+import Home from "./pages/Home";
+import Payment from "./pages/payment/Payment";
+import Profile from "./pages/profile/Profile";
 import { BrowserRouter, Route, Switch } from "react-router-dom";
-import DetailTrip from "./routes/detail_trips/DetailTrip";
-import Home from "./routes/Home";
-import Payment from "./routes/payment/Payment";
 
 function App() {
   return (
@@ -10,7 +11,8 @@ function App() {
       <Switch>
         <Route exact path="/" component={Home} />
         <Route exact path="/detail-trip" component={DetailTrip} />
-        <Route path="/detail-trip/payment" component={Payment} />
+        <Route exact path="/detail-trip/payment" component={Payment} />
+        <Route exact path="/user/profile" component={Profile} />
       </Switch>
     </BrowserRouter>
   );

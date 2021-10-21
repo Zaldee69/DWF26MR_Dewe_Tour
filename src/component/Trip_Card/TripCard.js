@@ -4,13 +4,13 @@ import Image from "../../img/Icon.png";
 import Image2 from "../../img/ss.png";
 import "./Trip_card.css";
 
-function TripCard() {
+function TripCard(props) {
   return (
     <div>
       <Container className="payment-content-container pt-3 ps-5 border border-3 rounded">
         <div className="payment-image d-flex flex-column gap-2">
-          <img src={Image2}></img>
-          <small>upload payment proof</small>
+          <img src={props.image}></img>
+          <p className="text-center">{props.title}</p>
         </div>
 
         <Row className="justify-content-between">

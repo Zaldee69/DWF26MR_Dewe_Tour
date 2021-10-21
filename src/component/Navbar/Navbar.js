@@ -5,6 +5,7 @@ import { Button, Modal, Form } from "react-bootstrap";
 import { Link } from "react-router-dom";
 import Image from "../../img/Icon1.png";
 import Image2 from "../../img/palm1.png";
+import Image3 from "../../img/elips.png";
 
 function Navbar() {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
@@ -40,7 +41,9 @@ function Navbar() {
         </div>
         <div className={`nav-title `}>
           {isLoggedIn ? (
-            <img src="assets/elips.png"></img>
+            <Link to="/user/profile">
+              <img src={Image3}></img>
+            </Link>
           ) : (
             <ul>
               <li>
