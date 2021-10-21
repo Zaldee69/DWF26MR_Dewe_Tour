@@ -1,8 +1,9 @@
 import React from "react";
 import "./Navbar.css";
 import { useState } from "react";
-import { Button, Modal, Form } from "react-bootstrap";
+import { Button, Modal, Form, Dropdown, DropdownButton } from "react-bootstrap";
 import { Link } from "react-router-dom";
+import DropdownComp from "../../items/dropdown/DropdownComp";
 import Image from "../../img/Icon1.png";
 import Image2 from "../../img/palm1.png";
 import Image3 from "../../img/elips.png";
@@ -41,9 +42,7 @@ function Navbar() {
         </div>
         <div className={`nav-title `}>
           {isLoggedIn ? (
-            <Link to="/user/profile">
-              <img src={Image3}></img>
-            </Link>
+            <DropdownComp />
           ) : (
             <ul>
               <li>
