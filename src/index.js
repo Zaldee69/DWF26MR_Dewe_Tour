@@ -1,13 +1,11 @@
 import React from "react";
 import ReactDOM from "react-dom";
 import "bootstrap/dist/css/bootstrap.min.css";
-
-import Home from "./routes/Home";
-import DetailTrip from "./routes/detail_trips/DetailTrip";
+import App from "./App";
 
 ReactDOM.render(
   <React.StrictMode>
-    <DetailTrip />
+    <App />
   </React.StrictMode>,
   document.getElementById("root")
 );

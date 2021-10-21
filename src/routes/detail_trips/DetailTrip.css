@@ -41,7 +41,8 @@
 
 .img img {
   width: 24px;
-  height: 35px;
+  height: 24px;
+  margin-top: 8px;
 }
 
 .img-container small {
@@ -79,7 +80,3 @@
   top: 33.32%;
   bottom: 53.5%;
 }
-
-/* .palm-img {
-
-} */

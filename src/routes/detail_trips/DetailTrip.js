@@ -1,5 +1,5 @@
 import React from "react";
-import Footer from "../../component/Footer/Footer";
+import { Link } from "react-router-dom";
 import Navbar from "../../component/Navbar/Navbar";
 import "./DetailTrip.css";
 
@@ -17,7 +17,7 @@ function DetailTrip() {
           <small className="fs-5">Australia</small>
         </div>
         <div className="container-fluid img-container">
-          <div className="container d-flex flex-column justify-content-center">
+          <div className="container d-flex flex-column gap-3 justify-content-center">
             <img className="image-1" src="assets/2.png"></img>
             <div className="d-flex gap-3">
               <img className="image-2" src="assets/1.png"></img>
@@ -95,11 +95,11 @@ function DetailTrip() {
             <h2>Total :</h2>
             <h2 className="text-warning">IDR. 12,000,000</h2>
           </div>
+
           <button className="btn btn-warning text-light px-4 py-2  fw-bold mt-4">
-            Book Now
+            <Link to="/detail-trip/payment">Book Now</Link>
           </button>
         </div>
-        <Footer />
       </div>
     </>
   );

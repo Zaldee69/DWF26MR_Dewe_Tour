@@ -3,6 +3,7 @@ import { Container } from "react-bootstrap";
 import "./Main.css";
 import Data from "../../data/Data.json";
 import Footer from "../Footer/Footer";
+import { Link } from "react-router-dom";
 
 function Main() {
   return (
@@ -20,7 +21,9 @@ function Main() {
             let path = `assets/${el.image}`;
             return (
               <div className="container content-container rounded mt-3">
-                <img src={path} alt="japan"></img>
+                <Link to="/detail-trip">
+                  <img src={path} alt="japan"></img>
+                </Link>
                 <h3>
                   {el.day}D/{el.nigth}N {el.destination}
                 </h3>

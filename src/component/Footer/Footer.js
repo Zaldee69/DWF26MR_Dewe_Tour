@@ -1,5 +1,6 @@
 import React from "react";
 import "./Footer.css";
+import Image from "../../img/leaf.png";
 
 function Footer() {
   return (
@@ -9,7 +10,7 @@ function Footer() {
           Copyright @ 2020 Dewe Tour - Muhammad Rizaldy - NIS. All Rights
           reserved
         </p>
-        <img alt="leaf" src="assets/leaf.png"></img>
+        <img alt="leaf" src={Image}></img>
       </div>
     </div>
   );
