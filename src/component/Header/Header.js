@@ -46,7 +46,7 @@ function Header() {
           subtitle="A small river named Duren flows by their place and supplies"
         />
         <Card
-          image="assets/Vector.png"
+          image="assets/cs.png"
           title="Our Dedicated
                  Support"
           subtitle="A small river named Duren flows by their place and supplies"

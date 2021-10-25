@@ -13,6 +13,11 @@ import QRimage from "../../img/qr.png";
 import Button from "@restart/ui/esm/Button";
 
 export const Profile = () => {
+  const userProfile = localStorage.getItem("user");
+  const newUserProfile = JSON.parse(userProfile);
+
+  console.log(newUserProfile[0].email);
+
   return (
     <div>
       <Container fluid className="profile-container ">
@@ -23,21 +28,21 @@ export const Profile = () => {
             <div className="d-flex align-items-center gap-3 mb-4 ">
               <img className="img-1" src={Image}></img>
               <div>
-                <p className="fw-bold">Muhammad Rizaldy</p>
+                <p className="fw-bold">{newUserProfile[0].fullname}</p>
                 <small>Full Name</small>
               </div>
             </div>
             <div className="d-flex align-items-center gap-3 mb-4 ">
               <img src={Envelope}></img>
               <div>
-                <p className="fw-bold">muhammadrizaldy19@gmail.com</p>
+                <p className="fw-bold">{newUserProfile[0].email}</p>
                 <small>Email</small>
               </div>
             </div>
             <div className="d-flex align-items-center gap-3 mb-4 ">
               <img src={Call}></img>
               <div>
-                <p className="fw-bold">082253654721</p>
+                <p className="fw-bold">{newUserProfile[0].phone}</p>
                 <small>Mobile Phone</small>
               </div>
             </div>

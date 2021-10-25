@@ -9,7 +9,7 @@ import { Link } from "react-router-dom";
 import { useContext } from "react";
 import { AuthContext } from "../../context/AuthContextProvider";
 
-function DropdownComp() {
+function AdminDropdown() {
   const { state, dispatch } = useContext(AuthContext);
   const logOutHandler = (e) => {
     e.preventDefault();
@@ -31,15 +31,9 @@ function DropdownComp() {
         <div className="dropdown-content py-3 px-3">
           <div className="desc d-flex flex-column gap-4">
             <div className="d-flex align-items-center gap-2">
-              <img src={User}></img>
-              <Link to="/user/profile">
-                <a className="fw-bold text-dark">Profile</a>
-              </Link>
-            </div>
-            <div className="d-flex align-items-center gap-2">
-              <img src={Payment}></img>
-              <Link to="/detail-trip/payment">
-                <a className="fw-bold text-dark">Pay</a>
+              <img src="/assets/journey1.png"></img>
+              <Link to="/list-transaction">
+                <a className="fw-bold text-dark">Trip</a>
               </Link>
             </div>
             <div
@@ -56,4 +50,4 @@ function DropdownComp() {
   );
 }
 
-export default DropdownComp;
+export default AdminDropdown;

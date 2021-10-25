@@ -63,3 +63,17 @@
   font-size: 43px;
   font-weight: 600;
 }
+
+.income-trip {
+  position: absolute;
+  top: 420px;
+  left: 220px;
+  font-size: 34px;
+  font-weight: 600;
+}
+
+.add-btn {
+  position: absolute;
+  top: 420px;
+  left: 1590px;
+}

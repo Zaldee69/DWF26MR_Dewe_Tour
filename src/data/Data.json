@@ -1,66 +1,106 @@
 [
   {
+    "id": 1,
     "day": 6,
-    "nigth": 4,
+    "night": 4,
     "destination": "Fun Tassie Vacation",
     "country": "Australia",
     "price": "12,000,000",
-    "image": "aussie.png"
+    "image": "aussie.png",
+    "transportation": "Qatar Airways",
+    "accomodation": "Hotel",
+    "quota": 0,
+    "description": "Halo"
   },
   {
-    "day": 6,
-    "nigth": 4,
+    "id": 2,
+    "day": 2,
+    "night": 3,
     "destination": "Exciting Summer",
     "country": "South Korea",
     "price": "12,000,000",
-    "image": "jakarta.png"
+    "image": "jakarta.png",
+    "transportation": "Korean Airways",
+    "accomodation": "Hotel",
+    "quota": 0,
+    "description": "Halo"
   },
   {
-    "day": 6,
-    "nigth": 4,
-    "destination": "WonderFull Autumn",
+    "id": 3,
+    "day": 7,
+    "night": 8,
+    "destination": "Wonderfull Autumn",
     "country": "Japan",
     "price": "12,000,000",
-    "image": "japan1.png"
+    "image": "japan1.png",
+    "transportation": "Adam Air",
+    "accomodation": "Hotel",
+    "quota": 0,
+    "description": "Halo"
   },
   {
-    "day": 6,
-    "nigth": 4,
+    "id": 4,
+    "day": 3,
+    "night": 4,
     "destination": "Labuan Bajo Delight",
     "country": "Indonesia",
     "price": "12,000,000",
-    "image": "labuan.png"
+    "image": "labuan.png",
+    "transportation": "Lion Air",
+    "accomodation": "Hotel",
+    "quota": 0,
+    "description": "Halo"
   },
   {
-    "day": 6,
-    "nigth": 4,
+    "id": 5,
+    "day": 10,
+    "night": 9,
     "destination": "Overland Jakarta",
     "country": "Indonesia",
     "price": "12,000,000",
-    "image": "jakarta.png"
+    "image": "jakarta.png",
+    "transportation": "Trans Air",
+    "accomodation": "Hotel",
+    "quota": 0,
+    "description": "Halo"
   },
   {
-    "day": 6,
-    "nigth": 4,
+    "id": 6,
+    "day": 3,
+    "night": 4,
     "destination": "Magic Tokyo Fun",
     "country": "Australia",
     "price": "12,000,000",
-    "image": "japan.png"
+    "image": "japan.png",
+    "transportation": "Aussie Airlines",
+    "accomodation": "Motel",
+    "quota": 0,
+    "description": "Halo"
   },
   {
-    "day": 6,
-    "nigth": 4,
+    "id": 7,
+    "day": 4,
+    "night": 3,
     "destination": "Magic Tokyo Fun",
     "country": "Australia",
     "price": "12,000,000",
-    "image": "labuan.png"
+    "image": "labuan.png",
+    "transportation": "Garuda Indonesia",
+    "accomodation": "Hotel",
+    "quota": 0,
+    "description": "Halo"
   },
   {
-    "day": 6,
-    "nigth": 4,
+    "id": 8,
+    "day": 1,
+    "night": 2,
     "destination": "Magic Tokyo Fun",
     "country": "Australia",
     "price": "12,000,000",
-    "image": "japan1.png"
+    "image": "japan1.png",
+    "transportation": "Kuyang Air",
+    "accomodation": "Hotel",
+    "quota": 0,
+    "description": "Halo"
   }
 ]

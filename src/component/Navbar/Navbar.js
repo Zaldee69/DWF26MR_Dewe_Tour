@@ -1,36 +1,118 @@
 import React from "react";
 import "./Navbar.css";
-import { useState } from "react";
-import { Button, Modal, Form, Dropdown, DropdownButton } from "react-bootstrap";
+import { useState, useContext } from "react";
+import { Button, Modal, Form } from "react-bootstrap";
 import { Link } from "react-router-dom";
 import DropdownComp from "../../items/dropdown/DropdownComp";
 import Image from "../../img/Icon1.png";
 import Image2 from "../../img/palm1.png";
-import Image3 from "../../img/elips.png";
+import { AuthContext } from "../../context/AuthContextProvider";
+import AdminDropdown from "../../items/dropdown/AdminDropdown";
+
+const a = [];
 
 function Navbar() {
-  const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [modal, setModal] = useState(false);
   const [registerModal, setRegisterModal] = useState(false);
+  const { state, dispatch } = useContext(AuthContext);
 
-  const loginHandler = () => {
-    setIsLoggedIn(true);
+  const [register, setRegister] = useState({
+    fullname: "",
+    email: "",
+    password: "",
+    phone: "",
+  });
+
+  //////
+  const user = localStorage.getItem("user");
+  const newUser = JSON.parse(user);
+  //////
+  const userLogin = localStorage.getItem("user_login");
+  const newUserLogin = JSON.parse(userLogin);
+  /////
+  const admin = localStorage.getItem("admin");
+  const newAdmin = JSON.parse(admin);
+  /////
+  const adminLogin = localStorage.getItem("admin_login");
+  const newAdminLogin = JSON.parse(adminLogin);
+
+  const registerSubmitHandler = (e) => {
+    a.push(register);
+    e.preventDefault();
+
+    localStorage.setItem("user", JSON.stringify(a));
+  };
+
+  const registerOnChangeHandler = (e) => {
+    setRegister((prevState) => ({
+      ...prevState,
+      [e.target.name]: e.target.value,
+    }));
+  };
+
+  const loginHandler = (e) => {
+    const email = document.getElementById("email").value;
+    const password = document.getElementById("password").value;
+
+    dispatch({
+      type: "AUTH",
+      payload: {
+        email: register.email,
+        password: register.password,
+        fullname: register.fullname,
+        phone: register.phone,
+      },
+    });
+    dispatch({
+      type: "ADMIN_AUTH",
+      payload: {
+        email: register.email,
+        password: register.password,
+        fullname: register.fullname,
+        phone: register.phone,
+      },
+    });
+    newUser.forEach((el, i) => {
+      if (email === newUser[i].email && password === newUser[i].password) {
+        console.log("from el :", el + "from newUser :", newUser);
+        if (newUser[i].email === "admin@gmail.com") {
+          dispatch({
+            type: "ADMIN_LOGIN",
+            payload: {
+              email: register.email,
+              password: register.password,
+              fullname: register.fullname,
+              phone: register.phone,
+            },
+          });
+        }
+        dispatch({
+          type: "LOGIN",
+          payload: {
+            email: register.email,
+            password: register.password,
+            fullname: register.fullname,
+            phone: register.phone,
+          },
+        });
+      }
+    });
+
+    e.preventDefault();
   };
 
   const openModalLogin = () => {
     setModal(true);
     setRegisterModal(false);
   };
-  const closeModalLogin = () => {
-    setModal(false);
-  };
+
   const openModalRegister = () => {
     setRegisterModal(true);
     setModal(false);
   };
-  const closeModalRegister = () => {
-    setRegisterModal(false);
-  };
+
+  const closeModalLogin = () => setModal(false);
+  const closeModalRegister = () => setRegisterModal(false);
 
   return (
     <div>
@@ -41,8 +123,12 @@ function Navbar() {
           </Link>
         </div>
         <div className={`nav-title `}>
-          {isLoggedIn ? (
-            <DropdownComp />
+          {newAdminLogin?.isLogin || newUserLogin?.isLogin ? (
+            newAdminLogin?.isAdmin ? (
+              <AdminDropdown />
+            ) : (
+              <DropdownComp />
+            )
           ) : (
             <ul>
               <li>
@@ -61,19 +147,26 @@ function Navbar() {
                       onClick={closeModalLogin}
                     ></button>
                     <Form>
-                      <Form.Group className="mb-4" controlId="formBasicEmail">
+                      <Form.Group className="mb-4">
                         <Form.Label className="fw-bold">
                           Email address
                         </Form.Label>
-                        <Form.Control type="email" />
+                        <Form.Control
+                          name="email"
+                          type="email"
+                          id="email"
+                          required
+                        />
                       </Form.Group>
 
-                      <Form.Group
-                        className="mb-4"
-                        controlId="formBasicPassword"
-                      >
+                      <Form.Group className="mb-4">
                         <Form.Label className="fw-bold">Password</Form.Label>
-                        <Form.Control type="password" />
+                        <Form.Control
+                          name="password"
+                          type="password"
+                          required
+                          id="password"
+                        />
                       </Form.Group>
                       <div class="d-flex flex-column gap-2 ">
                         <Button
@@ -81,6 +174,7 @@ function Navbar() {
                           className="text-white fw-bold"
                           variant="warning"
                           type="submit"
+                          required
                         >
                           Submit
                         </Button>
@@ -102,34 +196,57 @@ function Navbar() {
                       data-bs-dismiss="modal"
                       aria-label="Close"
                       onClick={closeModalRegister}
+                      required
                     ></button>
                     <Form>
                       <Form.Group className="mb-4" controlId="formBasicName">
                         <Form.Label className="fw-bold">FullName</Form.Label>
-                        <Form.Control type="text" />
+                        <Form.Control
+                          name="fullname"
+                          onChange={registerOnChangeHandler}
+                          type="text"
+                          required
+                        />
                       </Form.Group>
                       <Form.Group className="mb-4" controlId="formBasicEmail">
                         <Form.Label className="fw-bold">
                           Email address
                         </Form.Label>
-                        <Form.Control type="email" />
+                        <Form.Control
+                          onChange={registerOnChangeHandler}
+                          type="email"
+                          name="email"
+                          required
+                        />
                       </Form.Group>
                       <Form.Group
                         className="mb-4"
                         controlId="formBasicPassword"
                       >
                         <Form.Label className="fw-bold">Password</Form.Label>
-                        <Form.Control type="password" />
+                        <Form.Control
+                          onChange={registerOnChangeHandler}
+                          type="password"
+                          name="password"
+                          required
+                        />
                       </Form.Group>
                       <Form.Group className="mb-4" controlId="formBasicPhone">
                         <Form.Label className="fw-bold">Phone</Form.Label>
-                        <Form.Control type="text" />
+                        <Form.Control
+                          onChange={registerOnChangeHandler}
+                          name="phone"
+                          type="text"
+                          required
+                        />
                       </Form.Group>
                       <div class="d-flex flex-column gap-2 ">
                         <Button
                           className="text-white fw-bold"
                           variant="warning"
                           type="submit"
+                          onClick={registerSubmitHandler}
+                          required
                         >
                           Submit
                         </Button>

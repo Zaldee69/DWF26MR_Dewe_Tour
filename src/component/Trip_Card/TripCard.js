@@ -1,7 +1,7 @@
 import React from "react";
 import { Container, Row, Col } from "react-bootstrap";
 import Image from "../../img/Icon.png";
-import Image2 from "../../img/ss.png";
+
 import "./Trip_card.css";
 
 function TripCard(props) {
@@ -30,7 +30,7 @@ function TripCard(props) {
         <Container>
           <Row md={3} className="pb-5">
             <Col xs={6} md={4}>
-              <h1 className="fs-3 pt-2">6D/4N Fun Tassie Vacation</h1>
+              <h1 className="fs-3 pt-2">{props.detail}</h1>
               <small>Australia</small>
             </Col>
             <Col xs={3} md={2}>
@@ -39,7 +39,7 @@ function TripCard(props) {
             </Col>
             <Col xs={3} md={2}>
               <h3 className="fw-bold">Duration</h3>
-              <small>6 Day 4 Night</small>
+              <small>{`${props.day} Day ${props.night} Night`}</small>
             </Col>
           </Row>
           <Row md={3}>
