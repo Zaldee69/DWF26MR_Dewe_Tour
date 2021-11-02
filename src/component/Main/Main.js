@@ -1,28 +1,22 @@
 import { Container } from "react-bootstrap";
 import "./Main.css";
-import Data from "../../data/Data.json";
-import Footer from "../Footer/Footer";
 import { Link } from "react-router-dom";
 
 function Main() {
-  const admin = localStorage.getItem("admin_login");
-  const newAdmin = JSON.parse(admin);
-
-  const loginState = JSON.parse(localStorage.getItem("user_login"));
-
-  console.log(loginState);
+  const admin = JSON.parse(localStorage.getItem("admin_login"));
+  const dataTrip = JSON.parse(localStorage.getItem("data_trip"));
 
   return (
     <div>
-      <Container fluid className="main-container ">
+      <Container fluid className="main-container px-0 py-0 ">
         <img
           className="hibiscus-img"
           src="assets/hibiscus.png"
           alt="hibiscus"
         ></img>
         <img className="palm-img" src="assets/palm.png" alt="hibiscus"></img>
-        {newAdmin?.isAdmin ? (
-          <div>
+        {admin?.isAdmin ? (
+          <div className="title-container d-flex mx-auto justify-content-between">
             <h1 className="income-trip">Income Trip</h1>
             <Link to="/addtrip">
               <button className="btn add-btn btn btn-warning text-light fw-bold">
@@ -32,20 +26,19 @@ function Main() {
           </div>
         ) : (
           <>
-            <h1 className="group-title">Group Tour</h1>
+            <h1 className="group-title text-center pb-4">Group Tour</h1>
           </>
         )}
-        <div className="container-fluid container-group mt-5 d-flex gap-5 flex-wrap ">
-          {Data.map((el) => {
-            let path = `assets/${el.image}`;
-            let linkPath = `/detail-trip/${el.id}`;
+        <div className="container-fluid container-group  d-flex gap-5 flex-wrap ">
+          {dataTrip.map((el, i) => {
             return (
-              <div className="container content-container rounded mt-3">
-                <Link to={linkPath}>
-                  <img src={path} alt="japan"></img>
+              <div key={i} className="container content-container rounded mt-3">
+                <p className="apa ">24/17</p>
+                <Link to={`/detail-trip/${el.id}`}>
+                  <img src={`/assets/${el.image}`} alt="japan"></img>
                 </Link>
                 <h3>
-                  {el.day}D/{el.night}N {el.destination}
+                  {el.day}D/{el.night}N {el.titleTrip}
                 </h3>
                 <div className="price-container d-flex justify-content-between">
                   <p>IDR. {el.price}</p>
@@ -55,8 +48,6 @@ function Main() {
             );
           })}
         </div>
-
-        <Footer />
       </Container>
     </div>
   );

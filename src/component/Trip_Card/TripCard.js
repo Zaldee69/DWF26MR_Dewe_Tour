@@ -1,13 +1,12 @@
 import React from "react";
 import { Container, Row, Col } from "react-bootstrap";
 import Image from "../../img/Icon.png";
-
 import "./Trip_card.css";
 
 function TripCard(props) {
   return (
     <div>
-      <Container className="payment-content-container pt-3 ps-5 border border-3 rounded">
+      <Container className="payment-content-container pt-3 ps-5 rounded">
         <div className="payment-image d-flex flex-column gap-2">
           <img src={props.image}></img>
           <p className="text-center">{props.title}</p>
@@ -30,8 +29,8 @@ function TripCard(props) {
         <Container>
           <Row md={3} className="pb-5">
             <Col xs={6} md={4}>
-              <h1 className="fs-3 pt-2">{props.detail}</h1>
-              <small>Australia</small>
+              <h1 className="fs-3 pt-2">{props.destination}</h1>
+              <small>{props.country}</small>
             </Col>
             <Col xs={3} md={2}>
               <h3 className="fw-bold">Date Trip</h3>
@@ -55,7 +54,7 @@ function TripCard(props) {
             </Col>
             <Col xs={3} md={2}>
               <h3 className="fw-bold">Transportation</h3>
-              <small>Qatar Airways</small>
+              <small>{props.transport}</small>
             </Col>
           </Row>
         </Container>
@@ -81,18 +80,18 @@ function TripCard(props) {
             <small className="fs-6">1</small>
           </Col>
           <Col xs={2} md={2}>
-            <small className="fs-6">Abuya</small>
+            <small className="fs-6">Muhammad Rizaldy</small>
           </Col>
           <Col xs={2} md={2}>
             <small className="fs-6">Male</small>
           </Col>
           <Col xs={2} md={2}>
-            <small className="fs-6">082253</small>
+            <small className="fs-6">082253654721</small>
           </Col>
-          <Col xs={2} md={2}>
+          <Col xs={1} md={1}>
             <p className="fs-5 fw-normal mt-2">Qty</p>
           </Col>
-          <Col xs={2} md={2}>
+          <Col xs={3} md={3}>
             <p className="fs-5 mt-2 fw-normal">
               : <span className="ps-3 mt-3 fs-4">1</span>
             </p>
@@ -103,14 +102,14 @@ function TripCard(props) {
           <Col xs={2} md={2}></Col>
           <Col xs={2} md={2}></Col>
           <Col xs={2} md={2}></Col>
-          <Col xs={2} md={2}>
+          <Col xs={1} md={1}>
             <p className="fs-5 fw-normal mt-2">Total</p>
           </Col>
-          <Col xs={2} md={2}>
+          <Col xs={3} md={3}>
             <p className="fs-5 mt-2 fw-normal">
               :{" "}
               <span className="ps-3 mt-3 fw-bold text-danger fs-4">
-                12,000,000
+                IDR {props.price}
               </span>
             </p>
           </Col>

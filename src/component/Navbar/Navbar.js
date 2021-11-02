@@ -23,18 +23,14 @@ function Navbar() {
     phone: "",
   });
 
-  //////
-  const user = localStorage.getItem("user");
-  const newUser = JSON.parse(user);
-  //////
-  const userLogin = localStorage.getItem("user_login");
-  const newUserLogin = JSON.parse(userLogin);
-  /////
-  const admin = localStorage.getItem("admin");
-  const newAdmin = JSON.parse(admin);
-  /////
-  const adminLogin = localStorage.getItem("admin_login");
-  const newAdminLogin = JSON.parse(adminLogin);
+  const [userLogin, setUserLogin] = useState({
+    email: "",
+    password: "",
+  });
+
+  const newUser = JSON.parse(localStorage.getItem("user"));
+  const newUserLogin = JSON.parse(localStorage.getItem("user_login"));
+  const newAdminLogin = JSON.parse(localStorage.getItem("admin_login"));
 
   const registerSubmitHandler = (e) => {
     a.push(register);
@@ -50,10 +46,15 @@ function Navbar() {
     }));
   };
 
-  const loginHandler = (e) => {
-    const email = document.getElementById("email").value;
-    const password = document.getElementById("password").value;
+  const loginOnChangeHandler = (e) => {
+    setUserLogin((prevState) => ({
+      ...prevState,
+      [e.target.name]: e.target.value,
+    }));
+  };
 
+  const loginSubmitHandler = (e) => {
+    console.log(userLogin);
     dispatch({
       type: "AUTH",
       payload: {
@@ -73,8 +74,10 @@ function Navbar() {
       },
     });
     newUser.forEach((el, i) => {
-      if (email === newUser[i].email && password === newUser[i].password) {
-        console.log("from el :", el + "from newUser :", newUser);
+      if (
+        userLogin.email === newUser[i].email &&
+        userLogin.password === newUser[i].password
+      ) {
         if (newUser[i].email === "admin@gmail.com") {
           dispatch({
             type: "ADMIN_LOGIN",
@@ -152,9 +155,9 @@ function Navbar() {
                           Email address
                         </Form.Label>
                         <Form.Control
+                          onChange={loginOnChangeHandler}
                           name="email"
                           type="email"
-                          id="email"
                           required
                         />
                       </Form.Group>
@@ -163,14 +166,14 @@ function Navbar() {
                         <Form.Label className="fw-bold">Password</Form.Label>
                         <Form.Control
                           name="password"
+                          onChange={loginOnChangeHandler}
                           type="password"
                           required
-                          id="password"
                         />
                       </Form.Group>
                       <div class="d-flex flex-column gap-2 ">
                         <Button
-                          onClick={loginHandler}
+                          onClick={loginSubmitHandler}
                           className="text-white fw-bold"
                           variant="warning"
                           type="submit"

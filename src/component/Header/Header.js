@@ -47,7 +47,7 @@ function Header() {
         />
         <Card
           image="assets/cs.png"
-          title="Our Dedicated
+          title="Dedicated
                  Support"
           subtitle="A small river named Duren flows by their place and supplies"
         />

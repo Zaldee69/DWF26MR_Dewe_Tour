@@ -28,21 +28,21 @@ export const Profile = () => {
             <div className="d-flex align-items-center gap-3 mb-4 ">
               <img className="img-1" src={Image}></img>
               <div>
-                <p className="fw-bold">{newUserProfile[0].fullname}</p>
+                <p className="fw-bold">{newUserProfile[1].fullname}</p>
                 <small>Full Name</small>
               </div>
             </div>
             <div className="d-flex align-items-center gap-3 mb-4 ">
               <img src={Envelope}></img>
               <div>
-                <p className="fw-bold">{newUserProfile[0].email}</p>
+                <p className="fw-bold">{newUserProfile[1].email}</p>
                 <small>Email</small>
               </div>
             </div>
             <div className="d-flex align-items-center gap-3 mb-4 ">
               <img src={Call}></img>
               <div>
-                <p className="fw-bold">{newUserProfile[0].phone}</p>
+                <p className="fw-bold">{newUserProfile[1].phone}</p>
                 <small>Mobile Phone</small>
               </div>
             </div>
@@ -64,7 +64,16 @@ export const Profile = () => {
           </div>
         </Container>
         <h1 className="history-trip">History Trip</h1>
-        <TripCard className="trip-card" image={QRimage} title="TCK0101" />
+        <TripCard
+          night="4"
+          day="2"
+          transport="Qatar Airways"
+          destination="Fun Tassie Vacation"
+          country="1"
+          className="trip-card"
+          image={QRimage}
+          title="TCK1101"
+        />
         <Footer />
       </Container>
     </div>

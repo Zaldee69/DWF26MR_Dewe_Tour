@@ -1,9 +1,5 @@
-.main-container {
-  background-color: #f1f1f1;
-  height: 1400px;
-  position: absolute;
-  top: 530px;
-  z-index: -999999;
+body {
+  position: relative;
 }
 
 .hibiscus-img {
@@ -17,12 +13,9 @@
   position: absolute;
   left: -1%;
   top: 24%;
-  /* right: 91.04%;  */
 }
 
 .container-group {
-  top: 413px;
-  position: relative;
   width: 80%;
 }
 
@@ -30,6 +23,7 @@
   background-color: #ffffff;
   width: 320px;
   height: auto;
+  position: relative;
 }
 
 .content-container img {
@@ -56,24 +50,23 @@
   font-weight: 600;
 }
 
-.group-title {
+.apa {
   position: absolute;
-  top: 350px;
-  left: 835px;
-  font-size: 43px;
-  font-weight: 600;
+  right: 5px;
+  top: 30px;
+  padding: 5px 15px;
+  background-color: #ffffff;
+  border-radius: 5px;
+  font-weight: 500;
+  font-size: 12px;
 }
 
-.income-trip {
-  position: absolute;
-  top: 420px;
-  left: 220px;
-  font-size: 34px;
-  font-weight: 600;
+.main {
+  padding-top: 300px;
+  padding-bottom: 200px;
+  background-color: #f1f1f1;
 }
 
-.add-btn {
-  position: absolute;
-  top: 420px;
-  left: 1590px;
+.title-container {
+  width: 77.8%;
 }

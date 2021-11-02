@@ -23,7 +23,7 @@ const Reducer = (state, action) => {
         JSON.stringify({
           isLogin: true,
           isAdmin: false,
-          payload,
+          user: payload,
         })
       );
       return {
@@ -47,6 +47,7 @@ const Reducer = (state, action) => {
       };
 
     case "LOGOUT":
+      console.log(state);
       const loginState = JSON.parse(localStorage.getItem("user_login"));
       if (loginState) {
         localStorage.removeItem("user_login");
@@ -65,7 +66,8 @@ const Reducer = (state, action) => {
       }
 
     case "AUTH":
-      const login = JSON.parse(localStorage.getItem("user"));
+      const login = JSON.parse(localStorage.getItem("user_login"));
+
       return login
         ? login
         : {

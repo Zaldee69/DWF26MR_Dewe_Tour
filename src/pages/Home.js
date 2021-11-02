@@ -1,17 +1,20 @@
 import React from "react";
 import { Container } from "react-bootstrap";
-
+import Navbar from "../component/Navbar/Navbar";
 import Header from "../component/Header/Header";
 import Main from "../component/Main/Main";
+import Footer from "../component/Footer/Footer";
 
 function Home() {
   return (
-    <div>
-      <Container fluid className="px-0 mt-5 ">
-        <Header />
+    <>
+      <Navbar />
+      <Header />
+      <Container fluid className="main">
+        <Main />
+        <Footer />
       </Container>
-      <Main />
-    </div>
+    </>
   );
 }
 

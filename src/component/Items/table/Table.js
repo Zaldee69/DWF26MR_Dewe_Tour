@@ -1,6 +1,9 @@
 import { Table } from "react-bootstrap";
+import { useState } from "react";
+import BigModal from "../../Items/modal/BigModal";
 
 const TableComp = () => {
+  const [modalShow, setModalShow] = useState(false);
   return (
     <div>
       <Table striped bordered hover>
@@ -9,8 +12,8 @@ const TableComp = () => {
             <th>No</th>
             <th>Users</th>
             <th>Trip</th>
-            <th>Bukti Pembayaran</th>
-            <th>Status Pembayaran</th>
+            <th>Proof Of Payment</th>
+            <th>Payment Status</th>
             <th>Action</th>
           </tr>
         </thead>
@@ -22,7 +25,11 @@ const TableComp = () => {
             <td>bni.jpg</td>
             <td className="text-warning">Pending</td>
             <td className="text-center">
-              <img src="/assets/search.png"></img>
+              <img
+                alt=""
+                onClick={() => setModalShow(true)}
+                src="/assets/search.png"
+              ></img>
             </td>
           </tr>
           <tr>
@@ -32,7 +39,10 @@ const TableComp = () => {
             <td>bni.jpg</td>
             <td className="text-success">Approve</td>
             <td className="text-center">
-              <img src="/assets/search.png"></img>
+              <img
+                onClick={() => setModalShow(true)}
+                src="/assets/search.png"
+              ></img>
             </td>
           </tr>
           <tr>
@@ -42,7 +52,10 @@ const TableComp = () => {
             <td>bni.jpg</td>
             <td className="text-danger">Cancel</td>
             <td className="text-center">
-              <img src="/assets/search.png"></img>
+              <img
+                onClick={() => setModalShow(true)}
+                src="/assets/search.png"
+              ></img>
             </td>
           </tr>
           <tr>
@@ -52,7 +65,10 @@ const TableComp = () => {
             <td>bri.jpg</td>
             <td className="text-danger">Cancel</td>
             <td className="text-center">
-              <img src="/assets/search.png"></img>
+              <img
+                onClick={() => setModalShow(true)}
+                src="/assets/search.png"
+              ></img>
             </td>
           </tr>
           <tr>
@@ -60,9 +76,12 @@ const TableComp = () => {
             <td>Resi</td>
             <td>6D/4N Fun Tassie Vaca ...</td>
             <td>bca.jpg</td>
-            <td className="text-succes">Approve</td>
+            <td className="text-success">Approve</td>
             <td className="text-center">
-              <img src="/assets/search.png"></img>
+              <img
+                onClick={() => setModalShow(true)}
+                src="/assets/search.png"
+              ></img>
             </td>
           </tr>
           <tr>
@@ -72,11 +91,15 @@ const TableComp = () => {
             <td>bni.jpg</td>
             <td className="text-warning">Pending</td>
             <td className="text-center">
-              <img src="/assets/search.png"></img>
+              <img
+                onClick={() => setModalShow(true)}
+                src="/assets/search.png"
+              ></img>
             </td>
           </tr>
         </tbody>
       </Table>
+      <BigModal show={modalShow} onHide={() => setModalShow(false)} />
     </div>
   );
 };
