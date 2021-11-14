@@ -3,6 +3,7 @@
   background-color: #ffffff;
   padding: 40px 20px;
   flex-basis: 80%;
+  box-shadow: 5px 6px 17px -4px rgba(0, 0, 0, 0.1);
 }
 
 .card-container h2 {

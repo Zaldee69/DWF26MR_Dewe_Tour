@@ -1,5 +1,6 @@
 body {
   position: relative;
+  background-color: #f1f1f1;
 }
 
 .hibiscus-img {
@@ -12,7 +13,7 @@ body {
 .palm-img {
   position: absolute;
   left: -1%;
-  top: 24%;
+  top: 34%;
 }
 
 .container-group {
@@ -24,10 +25,13 @@ body {
   width: 320px;
   height: auto;
   position: relative;
+  box-shadow: 0px 0px 17px -2px rgba(0, 0, 0, 0.2);
+  padding-bottom: 10px;
 }
 
 .content-container img {
   width: 100%;
+  height: 222px;
   padding-top: 10px;
 }
 
@@ -62,11 +66,59 @@ body {
 }
 
 .main {
-  padding-top: 300px;
   padding-bottom: 200px;
   background-color: #f1f1f1;
 }
 
 .title-container {
   width: 77.8%;
+}
+
+.admin-style {
+  padding-top: 100px;
+}
+
+.user-style {
+  padding-top: 300px;
+}
+
+@media only screen and (max-width: 576px) {
+  .container h3 {
+    font-size: 18px;
+  }
+  .user-style {
+    padding-top: 120px;
+  }
+}
+@media only screen and (max-width: 454px) {
+  .container h3 {
+    font-size: 16px;
+  }
+
+  .price-container p {
+    font-size: 14px;
+  }
+
+  .content-container img {
+    height: 170px;
+  }
+
+  .user-style {
+    padding-top: 120px;
+  }
+}
+
+@media only screen and (max-width: 320px) {
+  .container h3 {
+    font-size: 14px;
+  }
+  .price-container p {
+    font-size: 12px;
+  }
+  .price-container small {
+    font-size: 12px;
+  }
+  .user-style {
+    padding-top: 120px;
+  }
 }

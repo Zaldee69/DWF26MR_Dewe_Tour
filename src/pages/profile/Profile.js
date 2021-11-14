@@ -1,4 +1,6 @@
-import React from "react";
+import { useState, useEffect, useContext } from "react";
+import { AuthContext } from "../../context/AuthContextProvider";
+import { API } from "../../config/api";
 import { Container } from "react-bootstrap";
 import "./Profile.css";
 import Navbar from "../../component/Navbar/Navbar";
@@ -8,15 +10,56 @@ import Image from "../../img/avatar.png";
 import Envelope from "../../img/envelope.png";
 import Call from "../../img/phone.png";
 import Map from "../../img/map.png";
-import ProfileImg from "../../img/Rectangle 12.png";
-import QRimage from "../../img/qr.png";
 import Button from "@restart/ui/esm/Button";
 
 export const Profile = () => {
-  const userProfile = localStorage.getItem("user");
-  const newUserProfile = JSON.parse(userProfile);
+  const { state } = useContext(AuthContext);
+  const [history, setHistory] = useState([]);
+  const [form, setForm] = useState({
+    image: "",
+  });
 
-  console.log(newUserProfile[0].email);
+  const getHistoryTransactions = async () => {
+    try {
+      const response = await API.get("/history-transactions");
+      setHistory(response.data.data);
+      console.log(history[0].status);
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+  const onChangeHandler = (e) => {
+    e.preventDefault();
+    setForm({
+      image: e.target.files,
+    });
+  };
+
+  const onSubmitHandler = async (e) => {
+    try {
+      e.preventDefault();
+      const config = {
+        headers: {
+          "Content-type": "multipart/form-data",
+        },
+      };
+
+      const formData = new FormData();
+
+      formData.set("image", form.image[0], form.image[0].name);
+
+      const response = await API.patch("/users", formData, config);
+      console.log(response);
+    } catch (error) {
+      console.log(error);
+    }
+    window.location.reload();
+  };
+
+  useEffect(() => {
+    getHistoryTransactions();
+  }, []);
 
   return (
     <div>
@@ -26,54 +69,83 @@ export const Profile = () => {
           <div className="profile-content px-4">
             <h1 className="mb-4">Personal Info</h1>
             <div className="d-flex align-items-center gap-3 mb-4 ">
-              <img className="img-1" src={Image}></img>
+              <img alt="" className="img-1" src={Image}></img>
               <div>
-                <p className="fw-bold">{newUserProfile[1].fullname}</p>
+                <p className="fw-bold">{state.user.user?.name}</p>
                 <small>Full Name</small>
               </div>
             </div>
             <div className="d-flex align-items-center gap-3 mb-4 ">
-              <img src={Envelope}></img>
+              <img alt="" src={Envelope}></img>
               <div>
-                <p className="fw-bold">{newUserProfile[1].email}</p>
+                <p className="fw-bold">{state.user.user?.email}</p>
                 <small>Email</small>
               </div>
             </div>
             <div className="d-flex align-items-center gap-3 mb-4 ">
-              <img src={Call}></img>
+              <img alt="" src={Call}></img>
               <div>
-                <p className="fw-bold">{newUserProfile[1].phone}</p>
+                <p className="fw-bold">{state.user.user?.phone}</p>
                 <small>Mobile Phone</small>
               </div>
             </div>
             <div className="d-flex align-items-center gap-3 mb-4 ">
-              <img src={Map}></img>
+              <img alt="" src={Map}></img>
               <div>
-                <p className="fw-bold">
-                  Perumahan Permata Bintaro Residence C-3
-                </p>
+                <p className="fw-bold">{state.user.user?.address}</p>
                 <small>Adress</small>
               </div>
             </div>
           </div>
-          <div className="d-flex flex-column gap-3 mb-4">
-            <img src={ProfileImg}></img>
-            <Button className="btn text-light fw-bold btn-warning">
-              Change Foto Profile
+          <div className="d-flex profile-img flex-column gap-2 position-relative mb-4">
+            <input
+              onChange={onChangeHandler}
+              name="image"
+              type="file"
+              id="actual-btn"
+              hidden
+            />
+            <label for="actual-btn">
+              <img
+                alt=""
+                className="position-absolute camera"
+                src="/assets/camera.png"
+              ></img>
+            </label>
+
+            <img alt="" className="profile" src={state.user.user?.image}></img>
+
+            <Button
+              className="btn btn-warning text-light fw-bold"
+              onClick={onSubmitHandler}
+              id="actual-btn"
+            >
+              Change Profile Picture
             </Button>
           </div>
         </Container>
         <h1 className="history-trip">History Trip</h1>
-        <TripCard
-          night="4"
-          day="2"
-          transport="Qatar Airways"
-          destination="Fun Tassie Vacation"
-          country="1"
-          className="trip-card"
-          image={QRimage}
-          title="TCK1101"
-        />
+        {history.map((el, i) => {
+          return (
+            <TripCard
+              destination={el.trips?.title}
+              transport={el.trips?.transportation}
+              day={el.trips?.day}
+              attachment={el.attachment}
+              night={el.trips?.night}
+              price={el?.total}
+              date={el.trips?.dateTrip}
+              status={el?.status}
+              name={el.users?.fullName}
+              gender={el.users?.gender}
+              phone={el.users?.phone}
+              country={el.trips?.country.name}
+              qty={el?.counterQty}
+              accomodation={el.trips?.accomodation}
+            />
+          );
+        })}
+
         <Footer />
       </Container>
     </div>

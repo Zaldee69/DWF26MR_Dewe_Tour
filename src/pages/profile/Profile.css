@@ -31,3 +31,22 @@ small {
   left: 294px;
   top: 830px;
 }
+
+.profile-img {
+  width: 350px;
+  height: auto;
+}
+
+.profile-img .camera {
+  width: 50px;
+  transition: all 0.5s !important;
+  top: 40%;
+  left: 42%;
+  cursor: pointer;
+  z-index: 100000;
+}
+
+.profile-img:hover .profile {
+  filter: blur(1px);
+  cursor: pointer;
+}

@@ -70,82 +70,74 @@ a:hover {
   left: 90%;
 }
 
-/* ----- Hamburger Menu ----- */
-
-.menu-toggle {
-  flex-direction: column;
-  height: 20px;
-  justify-content: space-between;
-  position: relative;
-  display: none;
-}
-
-.menu-toggle span {
-  display: block;
-  width: 28px;
-  height: 3px;
-  background: #fff;
-  border-radius: 3px;
-  transition: all 0.5s;
-}
-
-.menu-toggle input {
-  position: absolute;
-  width: 40px;
-  height: 28px;
-  opacity: 0;
-  left: -10px;
-  top: -6px;
-  cursor: pointer;
-  z-index: 2;
-}
-
-.menu-toggle span:nth-child(2) {
-  transform-origin: 0 0;
-}
-.menu-toggle span:nth-child(4) {
-  transform-origin: 0 100%;
-}
-.menu-toggle input:checked ~ span:nth-child(2) {
-  transform: rotate(45deg) translate(-1px, -1px);
-}
-.menu-toggle input:checked ~ span:nth-child(4) {
-  transform: rotate(-45deg) translate(-1px, 0);
-}
-.menu-toggle input:checked ~ span:nth-child(3) {
-  opacity: 0;
-  transform: scale(0);
-}
-
-@media only screen and (max-width: 724px) {
-  .nav-title ul {
-    position: absolute;
-    right: 0;
-    flex-direction: column;
-    height: 100vh;
-    top: 0;
-    background: black;
-    align-items: center;
-    justify-content: space-evenly;
-    z-index: -100;
-    background: #730ad4;
-    width: 30%;
-    transform: translateX(100%);
-    transition: all 1s;
+@media only screen and (max-width: 576px) {
+  .nav-logo img {
+    width: 130px;
+    height: 48px;
+    position: relative;
+    left: -60px;
   }
 
-  .nav-title ul.slide {
-    transform: translateX(0);
+  .nav {
+    height: 80px;
   }
 
-  .header-right {
+  .btn-one {
+    padding: 2px 18px;
+    font-size: 12px;
+  }
+
+  .btn-two {
+    padding: 4px 16px;
+    font-size: 12px;
+  }
+
+  .nav-title {
+    transform: translateX(-40px);
+  }
+
+  ul li {
+    margin-right: 10px;
+  }
+
+  .header-image {
     display: none;
   }
 
-  .header-left {
-    flex-basis: 100%;
+  .small-profile {
+    transform: translateX(150%);
+    position: absolute;
+    bottom: 20px;
   }
-  .menu-toggle {
-    display: flex;
+}
+
+@media only screen and (max-width: 375px) {
+  .btn-one {
+    padding: 2px 12px;
+    font-size: 12px;
+  }
+
+  .btn-two {
+    padding: 4px 12px;
+    font-size: 12px;
+  }
+
+  .nav-title {
+    transform: translateX(-25%);
+  }
+  .small-profile {
+    transform: translateX(80%);
+  }
+}
+@media only screen and (max-width: 320px) {
+  .nav-title {
+    transform: translateX(-46%);
+  }
+
+  .nav-logo img {
+    left: -80px;
+  }
+  .small-profile {
+    transform: translateX(40%);
   }
 }

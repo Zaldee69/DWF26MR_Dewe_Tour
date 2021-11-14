@@ -9,8 +9,7 @@ function Home() {
   return (
     <>
       <Navbar />
-      <Header />
-      <Container fluid className="main">
+      <Container fluid className="main px-0 ">
         <Main />
         <Footer />
       </Container>

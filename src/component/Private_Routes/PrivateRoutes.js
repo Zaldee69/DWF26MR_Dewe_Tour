@@ -1,19 +1,16 @@
 import { Redirect, Route } from "react-router-dom";
+import { useContext } from "react";
+import { AuthContext } from "../../context/AuthContextProvider";
 
 const PrivateRoute = ({ component: Component, ...rest }) => {
-  const adminLogin = localStorage.getItem("admin_login");
-  const newAdminLogin = JSON.parse(adminLogin);
+  const { state, dispatch } = useContext(AuthContext);
 
   return (
     <>
       <Route
         {...rest}
         render={(props) =>
-          newAdminLogin?.isAdmin ? (
-            <Component {...props} />
-          ) : (
-            <Redirect to="/" />
-          )
+          state.user.user?.role ? <Component {...props} /> : <Redirect to="/" />
         }
       />
     </>

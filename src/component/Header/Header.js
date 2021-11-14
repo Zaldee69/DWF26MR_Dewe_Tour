@@ -1,9 +1,17 @@
-import React from "react";
+import { useContext } from "react";
 import "./Header.css";
 import Navbar from "../Navbar/Navbar";
-import Card from "../../items/card/Card";
+import Card from "../Items/card/Card";
+import { AuthContext } from "../../context/AuthContextProvider";
 
-function Header() {
+function Header({ search, setSearch }) {
+  const { state } = useContext(AuthContext);
+
+  const searchOnChange = (e) => {
+    setSearch(e.target.value);
+    console.log(search);
+  };
+
   return (
     <div className="header-image">
       {<Navbar />}
@@ -17,41 +25,46 @@ function Header() {
       <div className="container-fluid d-flex input-container">
         <div class="input-group mb-3">
           <input
+            onChange={searchOnChange}
             type="text"
             class="form-control"
             id="basic-addon2"
             aria-label="Recipient's username"
             aria-describedby="basic-addon2"
           />
-          <a class="input-group-text" id="basic-addon2">
+          <a href class="input-group-text" id="basic-addon2">
             Search
           </a>
         </div>
       </div>
-      <div className="cards-container d-flex gap-5 justify-content-center">
-        <Card
-          image="assets/guarantee.png"
-          title="Best Price
+      {state.user.user?.role === "admin" || search ? (
+        <></>
+      ) : (
+        <div className="cards-container d-flex gap-5 justify-content-center">
+          <Card
+            image="assets/guarantee.png"
+            title="Best Price
                  Guarantee"
-          subtitle="A small river named Duren flows by their place and supplies"
-        />
-        <Card
-          image="assets/heart.png"
-          title="Travellers Love Us"
-          subtitle="A small river named Duren flows by their place and supplies"
-        />
-        <Card
-          image="assets/agent.png"
-          title="Best Travels Agent"
-          subtitle="A small river named Duren flows by their place and supplies"
-        />
-        <Card
-          image="assets/cs.png"
-          title="Dedicated
+            subtitle="A small river named Duren flows by their place and supplies"
+          />
+          <Card
+            image="assets/heart.png"
+            title="Travellers Love Us"
+            subtitle="A small river named Duren flows by their place and supplies"
+          />
+          <Card
+            image="assets/agent.png"
+            title="Best Travels Agent"
+            subtitle="A small river named Duren flows by their place and supplies"
+          />
+          <Card
+            image="assets/cs.png"
+            title="Dedicated
                  Support"
-          subtitle="A small river named Duren flows by their place and supplies"
-        />
-      </div>
+            subtitle="A small river named Duren flows by their place and supplies"
+          />
+        </div>
+      )}
     </div>
   );
 }

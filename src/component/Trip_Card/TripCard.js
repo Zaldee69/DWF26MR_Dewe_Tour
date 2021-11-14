@@ -1,20 +1,49 @@
-import React from "react";
-import { Container, Row, Col } from "react-bootstrap";
+import React, { useContext, useState } from "react";
+import { Container, Row, Col, Button } from "react-bootstrap";
 import Image from "../../img/Icon.png";
 import "./Trip_card.css";
+import { AuthContext } from "../../context/AuthContextProvider";
+import RupiahFormat from "../../utils/RupiahFormat";
 
 function TripCard(props) {
+  const { state } = useContext(AuthContext);
+  const [form, setForm] = useState({
+    image: "",
+  });
+
+  const onChangeHandler = (e) => {
+    e.preventDefault();
+    setForm({
+      image: e.target.files,
+    });
+  };
+
   return (
     <div>
-      <Container className="payment-content-container pt-3 ps-5 rounded">
+      <Container className="payment-content-container pt-3 ps-5 mt-5 rounded">
         <div className="payment-image d-flex flex-column gap-2">
-          <img src={props.image}></img>
-          <p className="text-center">{props.title}</p>
+          <img alt="" src={props.attachment}></img>
+          {state.user.user?.role === "user" ? (
+            <>
+              <input
+                onChange={onChangeHandler}
+                name="image"
+                type="file"
+                id="actual-btn"
+                hidden
+              />
+              <label className="text-center fw-bold" for="actual-btn">
+                Upload Image
+              </label>
+            </>
+          ) : (
+            <></>
+          )}
         </div>
 
         <Row className="justify-content-between">
           <Col xs={9}>
-            <img src={Image}></img>
+            <img alt={Image} src={Image}></img>
           </Col>
           <Col xs={3}>
             <div className="ps-5">
@@ -34,7 +63,7 @@ function TripCard(props) {
             </Col>
             <Col xs={3} md={2}>
               <h3 className="fw-bold">Date Trip</h3>
-              <small>26 August 2020</small>
+              <small>{props.date}</small>
             </Col>
             <Col xs={3} md={2}>
               <h3 className="fw-bold">Duration</h3>
@@ -43,14 +72,21 @@ function TripCard(props) {
           </Row>
           <Row md={3}>
             <Col xs={6} md={4}>
-              <p className=" info-payment mt-3 px-3 py-1 d-inline-flex text-light fs-7">
-                {" "}
-                Waiting Aprove{" "}
+              <p
+                className={` ${
+                  props.status == "Pending"
+                    ? "bg-warning"
+                    : props.status == "Approve"
+                    ? "bg-success"
+                    : "bg-danger"
+                }  mt-3 px-3 py-1 d-inline-flex text-light fs-7`}
+              >
+                {props.status}
               </p>
             </Col>
             <Col xs={3} md={2}>
               <h3 className="fw-bold">Accomodation</h3>
-              <small>Hotel 4 Night</small>
+              <small>{props.accomodation}</small>
             </Col>
             <Col xs={3} md={2}>
               <h3 className="fw-bold">Transportation</h3>
@@ -80,20 +116,20 @@ function TripCard(props) {
             <small className="fs-6">1</small>
           </Col>
           <Col xs={2} md={2}>
-            <small className="fs-6">Muhammad Rizaldy</small>
+            <small className="fs-6">{props.name}</small>
           </Col>
           <Col xs={2} md={2}>
-            <small className="fs-6">Male</small>
+            <small className="fs-6">{props.gender}</small>
           </Col>
           <Col xs={2} md={2}>
-            <small className="fs-6">082253654721</small>
+            <small className="fs-6">{props.phone}</small>
           </Col>
           <Col xs={1} md={1}>
             <p className="fs-5 fw-normal mt-2">Qty</p>
           </Col>
           <Col xs={3} md={3}>
             <p className="fs-5 mt-2 fw-normal">
-              : <span className="ps-3 mt-3 fs-4">1</span>
+              : <span className="ps-3 mt-3 fs-4">{props.qty}</span>
             </p>
           </Col>
         </Row>
@@ -109,12 +145,24 @@ function TripCard(props) {
             <p className="fs-5 mt-2 fw-normal">
               :{" "}
               <span className="ps-3 mt-3 fw-bold text-danger fs-4">
-                IDR {props.price}
+                IDR {RupiahFormat(props.price)}
               </span>
             </p>
           </Col>
         </Row>
       </Container>
+      {state.user.user?.role === "admin" ||
+      props.status === "Approve" ||
+      props.status === "Cancel" ? (
+        <></>
+      ) : (
+        <Button
+          onClick={() => props.payment({ id: props.id, form })}
+          className="btn btn-warning text-light fw-bold px-5 mt-3 py-1 btn-payment"
+        >
+          Pay
+        </Button>
+      )}
     </div>
   );
 }

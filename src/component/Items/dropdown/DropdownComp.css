@@ -1,8 +1,7 @@
 .dropdown {
-  position: relative;
   display: inline-block;
   border-radius: 12px;
-  margin-left: 200px;
+  position: relative;
 }
 .dropdown-content {
   margin-top: 15px;
@@ -13,6 +12,7 @@
   min-width: 200px;
   box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
   border-radius: 12px;
+  z-index: 999999999999;
 }
 .desc {
   padding: 15px;
@@ -35,4 +35,28 @@
 
 .po-hover {
   cursor: pointer;
+}
+
+.small-profile img {
+  width: 50px;
+  border-radius: 50%;
+  border: 2px solid #ffaf00;
+}
+
+.count {
+  background-color: #ffc107;
+  padding: 1px 9px;
+  border-radius: 50%;
+  color: #ffffff;
+  font-size: 16px;
+}
+.count-1 {
+  background-color: #ffc107;
+  padding: 1px 9px;
+  border-radius: 50%;
+  color: #ffffff;
+  font-size: 16px;
+  position: absolute !important;
+  left: 40px;
+  bottom: 5px;
 }

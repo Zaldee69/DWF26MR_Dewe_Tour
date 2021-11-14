@@ -1,21 +1,51 @@
 import { Container } from "react-bootstrap";
+import { useState, useEffect, useContext } from "react";
 import "./Main.css";
 import { Link } from "react-router-dom";
+import { API } from "../../config/api";
+import { AuthContext } from "../../context/AuthContextProvider";
+import Header from "../Header/Header";
+import GroupTour from "../Items/GroupTourCard/GroupTour";
 
 function Main() {
-  const admin = JSON.parse(localStorage.getItem("admin_login"));
-  const dataTrip = JSON.parse(localStorage.getItem("data_trip"));
+  const { state } = useContext(AuthContext);
+  const [trip, setTrip] = useState([]);
+
+  const [search, setSearch] = useState("");
+
+  // Fetching trip data from database
+  const getTrip = async () => {
+    try {
+      const response = await API.get("/trip");
+      // Store trip data to useState variabel
+      setTrip(response.data.data);
+      console.log(trip);
+    } catch (error) {
+      console.log(error);
+    }
+  };
+  useEffect(() => {
+    getTrip();
+  }, []);
 
   return (
-    <div>
-      <Container fluid className="main-container px-0 py-0 ">
+    <>
+      <Header search={search} setSearch={setSearch} />
+      <Container
+        fluid
+        className={`main-container ${
+          state.user.user?.role === "admin" || search
+            ? "admin-style"
+            : "user-style"
+        }  `}
+      >
         <img
           className="hibiscus-img"
           src="assets/hibiscus.png"
           alt="hibiscus"
         ></img>
         <img className="palm-img" src="assets/palm.png" alt="hibiscus"></img>
-        {admin?.isAdmin ? (
+        {state.user.user?.role === "admin" ? (
           <div className="title-container d-flex mx-auto justify-content-between">
             <h1 className="income-trip">Income Trip</h1>
             <Link to="/addtrip">
@@ -29,27 +59,9 @@ function Main() {
             <h1 className="group-title text-center pb-4">Group Tour</h1>
           </>
         )}
-        <div className="container-fluid container-group  d-flex gap-5 flex-wrap ">
-          {dataTrip.map((el, i) => {
-            return (
-              <div key={i} className="container content-container rounded mt-3">
-                <p className="apa ">24/17</p>
-                <Link to={`/detail-trip/${el.id}`}>
-                  <img src={`/assets/${el.image}`} alt="japan"></img>
-                </Link>
-                <h3>
-                  {el.day}D/{el.night}N {el.titleTrip}
-                </h3>
-                <div className="price-container d-flex justify-content-between">
-                  <p>IDR. {el.price}</p>
-                  <small>{el.country}</small>
-                </div>
-              </div>
-            );
-          })}
-        </div>
+        <GroupTour trip={trip} search={search} />
       </Container>
-    </div>
+    </>
   );
 }
 

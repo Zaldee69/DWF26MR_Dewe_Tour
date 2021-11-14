@@ -1,25 +1,90 @@
-import DetailTrip from "./pages/detail_trips/DetailTrip";
+//Global State
+import { AuthContext } from "./context/AuthContextProvider";
+
+//React-router-dom
+import { BrowserRouter, Route, Switch } from "react-router-dom";
+
+//Hooks
+import { useContext, useEffect } from "react";
+
+//Axios config
+import { API, setAuthToken } from "./config/api";
+
+//Routes
+import DetailTrip from "./pages/DetailTrip/DetailTrip";
 import Home from "./pages/Home";
 import Payment from "./pages/payment/Payment";
 import Profile from "./pages/profile/Profile";
-import { BrowserRouter, Route, Switch } from "react-router-dom";
 import ListTransaction from "./pages/list_transactions/ListTransaction";
-import AddTrip from "./pages/add_trip_form/AddTrip";
+import AddTrip from "./pages/AddTripForm/AddTrip";
 import PrivateRoute from "./component/Private_Routes/PrivateRoutes";
+
+//init token
+if (localStorage.token) {
+  setAuthToken(localStorage.token);
+}
+
 function App() {
+  const { state, dispatch } = useContext(AuthContext);
+
+  console.log(localStorage.token);
+
+  useEffect(() => {
+    if (localStorage.token) {
+      setAuthToken(localStorage.token);
+    }
+  }, []);
+
+  const userAuth = async () => {
+    try {
+      const response = await API.get("/check-auth");
+
+      if (response.status === 404) {
+        return dispatch({
+          type: "AUTH_ERROR",
+        });
+      }
+
+      //get user data
+      let payload = response.data.data;
+
+      payload.token = localStorage.token;
+      //send data to useContext
+      dispatch({
+        type: "USER_SUCCESS",
+        payload,
+      });
+    } catch (error) {
+      console.log(error);
+      dispatch({
+        type: "AUTH_ERROR",
+      });
+    }
+  };
+
+  useEffect(() => {
+    userAuth();
+  }, []);
+
   return (
     <BrowserRouter>
       <Switch>
-        <Route exact path="/" component={Home} />
-        <Route exact path="/detail-trip/:id" component={DetailTrip} />
-        <Route exact path="/detail-trip/payment/:id" component={Payment} />
-        <Route exact path="/user/profile" component={Profile} />
-        <PrivateRoute exact path="/addtrip" component={AddTrip} />
-        <PrivateRoute
-          exact
-          path="/list-transaction"
-          component={ListTransaction}
-        />
+        {state.isLoading ? (
+          "Loading"
+        ) : (
+          <>
+            <Route exact path="/" component={Home} />
+            <Route exact path="/detail-trip/:id" component={DetailTrip} />
+            <Route exact path="/payment/" component={Payment} />
+            <Route exact path="/user/profile" component={Profile} />
+            <PrivateRoute exact path="/addtrip" component={AddTrip} />
+            <PrivateRoute
+              exact
+              path="/list-transaction"
+              component={ListTransaction}
+            />
+          </>
+        )}
       </Switch>
     </BrowserRouter>
   );

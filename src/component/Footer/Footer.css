@@ -1,6 +1,6 @@
 .footer-container {
   background-color: #ffaf00;
-  position: absolute;
+  position: fixed;
   bottom: 0;
   left: 0;
   width: 100%;
@@ -9,10 +9,24 @@
   text-align: center;
   color: #ffffff;
   font-weight: 600;
+  /* overflow: hidden; */
 }
 
 .footer-container img {
   position: absolute;
   bottom: 0;
   right: 0;
+}
+
+@media only screen and (max-width: 576px) {
+  .footer-container img {
+    display: none;
+  }
+
+  .footer-container p {
+    font-size: 12px;
+  }
+  .hibiscus-img {
+    display: none;
+  }
 }

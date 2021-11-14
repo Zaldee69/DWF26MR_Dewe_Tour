@@ -1,12 +1,13 @@
 import { Container, Form, Row, Col } from "react-bootstrap";
-import { useState } from "react";
+import { useState, useEffect } from "react";
+import { useHistory } from "react-router";
 import Footer from "../../component/Footer/Footer";
 import Navbar from "../../component/Navbar/Navbar";
 import "./AddTrip.css";
+import { API } from "../../config/api";
 
 const AddTrip = () => {
   const [addTrip, setaddTrip] = useState({
-    id: "",
     titleTrip: "",
     country: "",
     accomodation: "",
@@ -14,29 +15,78 @@ const AddTrip = () => {
     price: "",
     eat: "",
     day: "",
+    date: "",
     night: "",
     description: "",
+    quota: "",
     image: "",
   });
+
+  //history
+  const history = useHistory();
+
+  const [country, setCountry] = useState([]);
+
+  const getCountry = async () => {
+    const config = {
+      headers: {
+        "Content-type": "application/json",
+      },
+    };
+
+    const response = await API.get("/country", config);
+    setCountry(response.data.data);
+  };
+
+  useEffect(() => {
+    getCountry();
+  }, []);
 
   //Handle input from admin
   const addTripOnChange = (e) => {
     //set new value to setAddtrip
     setaddTrip((prevState) => ({
       ...prevState,
-      [e.target.name]: e.target.value,
-      id: Date.now(),
+      [e.target.name]:
+        e.target.type === "file" ? e.target.files : e.target.value,
     }));
   };
 
   //handle submit from admin
   const addTripOnSubmit = (e) => {
-    e.preventDefault();
-    const dataTrip = JSON.parse(localStorage.getItem("data_trip"));
-    //push to localstorage
-    dataTrip.push(addTrip);
-    //set new value
-    localStorage.setItem("data_trip", JSON.stringify(dataTrip));
+    try {
+      e.preventDefault();
+
+      const config = {
+        headers: {
+          "Content-type": "multipart/form-data",
+        },
+      };
+
+      const formData = new FormData();
+      for (let i = 0; i < addTrip.image.length; i++) {
+        formData.append("image", addTrip.image[i]);
+      }
+      formData.append("title", addTrip.titleTrip);
+      formData.append("countries", addTrip.country);
+      formData.append("accomodation", addTrip.accomodation);
+      formData.append("transportation", addTrip.transportation);
+      formData.append("eat", addTrip.eat);
+      formData.append("day", addTrip.day);
+      formData.append("night", addTrip.night);
+      formData.append("dateTrip", addTrip.date);
+      formData.append("quota", addTrip.quota);
+      formData.append("price", addTrip.price);
+      formData.append("description", addTrip.description);
+
+      API.post("/trip", formData, config);
+
+      setTimeout(() => {
+        history.push("/");
+      }, 500);
+    } catch (error) {
+      console.log(error);
+    }
   };
 
   return (
@@ -44,7 +94,7 @@ const AddTrip = () => {
       <Container fluid className="add-trip">
         <Navbar />
         <Container className="add-trip-container">
-          <Form className="">
+          <Form enctype="multipart/form-data" className="">
             <Form.Group className="mb-3" controlId="titleTrip">
               <Form.Label className="fw-bold">Title Trip</Form.Label>
               <Form.Control
@@ -60,11 +110,13 @@ const AddTrip = () => {
               aria-label="Default select example"
               className="shadow-none"
             >
-              <option value="Japan">Japan</option>
-              <option value="Indonesia">Indonesia</option>
-              <option value="Australia">Australia</option>
-              <option value="South Korea">South Korea</option>
-              <option value="Japan">Japan</option>
+              {country.map((el, i) => {
+                return (
+                  <option key={i} value={el.id}>
+                    {el.name}
+                  </option>
+                );
+              })}
             </Form.Select>
             <Form.Group
               className="mb-3"
@@ -114,6 +166,30 @@ const AddTrip = () => {
               className="mb-3"
               controlId="formBasicCheckbox"
             ></Form.Group>
+            <Form.Group className="mb-3" controlId="date">
+              <Form.Label className="fw-bold">Date</Form.Label>
+              <Form.Control
+                onChange={addTripOnChange}
+                name="date"
+                type="date"
+              />
+            </Form.Group>
+            <Form.Group
+              className="mb-3"
+              controlId="formBasicCheckbox"
+            ></Form.Group>
+            <Form.Group className="mb-3" controlId="quota">
+              <Form.Label className="fw-bold">quota</Form.Label>
+              <Form.Control
+                onChange={addTripOnChange}
+                name="quota"
+                type="text"
+              />
+            </Form.Group>
+            <Form.Group
+              className="mb-3"
+              controlId="formBasicCheckbox"
+            ></Form.Group>
             <Form>
               <Row>
                 <Form.Label className="fw-bold">Duration</Form.Label>
@@ -151,6 +227,7 @@ const AddTrip = () => {
             <Form.Group controlId="formFile" className="mb-3">
               <Form.Label className="fw-bold">Image</Form.Label>
               <Form.Control
+                multiple
                 onChange={addTripOnChange}
                 type="file"
                 name="image"
