@@ -25,16 +25,20 @@ function TripCard(props) {
           <img alt="" src={props.attachment}></img>
           {state.user.user?.role === "user" ? (
             <>
-              <input
-                onChange={onChangeHandler}
-                name="image"
-                type="file"
-                id="actual-btn"
-                hidden
-              />
-              <label className="text-center fw-bold" for="actual-btn">
-                Upload Image
-              </label>
+              {props.status === "Waiting Payment" && (
+                <>
+                  <input
+                    onChange={onChangeHandler}
+                    name="image"
+                    type="file"
+                    id="actual-btn"
+                    hidden
+                  />
+                  <label className="text-center fw-bold" for="actual-btn">
+                    Upload Image
+                  </label>
+                </>
+              )}
             </>
           ) : (
             <></>
@@ -145,7 +149,7 @@ function TripCard(props) {
             <p className="fs-5 mt-2 fw-normal">
               :{" "}
               <span className="ps-3 mt-3 fw-bold text-danger fs-4">
-                IDR {RupiahFormat(props.price)}
+                IDR {RupiahFormat(props.total)}
               </span>
             </p>
           </Col>

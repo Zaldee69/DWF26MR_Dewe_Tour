@@ -23,7 +23,6 @@ export const Profile = () => {
     try {
       const response = await API.get("/history-transactions");
       setHistory(response.data.data);
-      console.log(history[0].status);
     } catch (error) {
       console.log(error);
     }
@@ -49,8 +48,7 @@ export const Profile = () => {
 
       formData.set("image", form.image[0], form.image[0].name);
 
-      const response = await API.patch("/users", formData, config);
-      console.log(response);
+      await API.patch("/users", formData, config);
     } catch (error) {
       console.log(error);
     }
@@ -142,6 +140,7 @@ export const Profile = () => {
               country={el.trips?.country.name}
               qty={el?.counterQty}
               accomodation={el.trips?.accomodation}
+              total={history[i].total}
             />
           );
         })}

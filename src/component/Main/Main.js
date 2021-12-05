@@ -5,7 +5,7 @@ import { Link } from "react-router-dom";
 import { API } from "../../config/api";
 import { AuthContext } from "../../context/AuthContextProvider";
 import Header from "../Header/Header";
-import GroupTour from "../Items/GroupTourCard/GroupTour";
+import GroupTour from "../../component/Items/GroupTourCard/GroupTour";
 
 function Main() {
   const { state } = useContext(AuthContext);

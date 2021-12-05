@@ -1,6 +1,7 @@
 import React from "react";
 import ReactDOM from "react-dom";
 import "bootstrap/dist/css/bootstrap.min.css";
+import "react-notifications/lib/notifications.css";
 import { AuthContextProvider } from "./context/AuthContextProvider";
 import App from "./App";
 

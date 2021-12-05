@@ -52,8 +52,7 @@ const Login = ({ modalLogin, openModalRegister, closeModalLogin }) => {
       }
       window.location.reload();
     } catch (error) {
-      console.log(error);
-      setMessage("*Email or Password incorrect");
+      setMessage(error.response.data.message);
     }
   };
 

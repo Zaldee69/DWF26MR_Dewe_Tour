@@ -18,6 +18,7 @@ import Profile from "./pages/profile/Profile";
 import ListTransaction from "./pages/list_transactions/ListTransaction";
 import AddTrip from "./pages/AddTripForm/AddTrip";
 import PrivateRoute from "./component/Private_Routes/PrivateRoutes";
+import Wishlist from "./pages/wishlist/Wishlist";
 
 //init token
 if (localStorage.token) {
@@ -27,14 +28,13 @@ if (localStorage.token) {
 function App() {
   const { state, dispatch } = useContext(AuthContext);
 
-  console.log(localStorage.token);
-
   useEffect(() => {
     if (localStorage.token) {
       setAuthToken(localStorage.token);
     }
   }, []);
 
+  //get user data
   const userAuth = async () => {
     try {
       const response = await API.get("/check-auth");
@@ -45,10 +45,10 @@ function App() {
         });
       }
 
-      //get user data
       let payload = response.data.data;
 
       payload.token = localStorage.token;
+
       //send data to useContext
       dispatch({
         type: "USER_SUCCESS",
@@ -83,6 +83,7 @@ function App() {
               path="/list-transaction"
               component={ListTransaction}
             />
+            <PrivateRoute exact path="/wishlist" component={Wishlist} />
           </>
         )}
       </Switch>

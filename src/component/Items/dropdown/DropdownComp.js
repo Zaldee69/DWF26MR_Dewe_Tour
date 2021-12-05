@@ -42,6 +42,18 @@ function DropdownComp() {
                 </a>
               </Link>
             </div>
+            <div className="d-flex align-items-center gap-2">
+              <img
+                style={{ width: "30px", height: "30px" }}
+                alt=""
+                src="/assets/he.png"
+              ></img>
+              <Link to="/wishlist">
+                <a href className="fw-bold text-dark">
+                  Wishlist
+                </a>
+              </Link>
+            </div>
             <div
               onClick={logOutHandler}
               className="d-flex align-items-center po-hover gap-2"

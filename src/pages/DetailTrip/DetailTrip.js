@@ -1,6 +1,6 @@
 //package
 import { useState, useEffect, useContext } from "react";
-import { Link, useParams, useHistory } from "react-router-dom";
+import { useParams, useHistory } from "react-router-dom";
 
 //Rupiah formatter
 import RupiahFormat from "../../utils/RupiahFormat";
@@ -8,7 +8,8 @@ import RupiahFormat from "../../utils/RupiahFormat";
 //component
 import Footer from "../../component/Footer/Footer";
 import Navbar from "../../component/Navbar/Navbar";
-import { Container } from "react-bootstrap";
+import { Container, Button } from "react-bootstrap";
+import toast, { Toaster } from "react-hot-toast";
 //styling
 import "./DetailTrip.css";
 
@@ -25,27 +26,25 @@ function DetailTrip() {
   const { id } = useParams();
   const history = useHistory();
 
+  const successNotify = (str) => toast.success(str);
+  const failedNotify = (str) => toast.error(str);
+
   // Fetching trip data from database
   const getTrip = async (id) => {
     try {
       const response = await API.get("/trip/" + id);
       // Store trip data to useState variabel
       setTrip(response.data);
-      console.log(state);
-    } catch (error) {
-      console.log(error);
-    }
+    } catch (error) {}
   };
 
   //delete trip function
   const deleteTrip = async () => {
     try {
-      const response = await API.delete("/trip/" + id);
-      console.log(response);
+      await API.delete("/trip/" + id);
+
       history.push("/");
-    } catch (error) {
-      console.log(error);
-    }
+    } catch (error) {}
   };
 
   const handleTransaction = async () => {
@@ -77,6 +76,22 @@ function DetailTrip() {
       console.log(error);
     }
   };
+  const addWishlist = (id) => {
+    const config = {
+      headers: {
+        "Content-type": "application/json",
+      },
+    };
+
+    API.post("/wishlist", { trip: id }, config)
+      .then((res) => {
+        successNotify(res.data.message);
+      })
+      .catch((err) => {
+        failedNotify(err.response.data.message);
+      });
+  };
+
   // UseEffect
   useEffect(() => {
     getTrip(id);
@@ -210,35 +225,49 @@ function DetailTrip() {
                 </h2>
               </div>
             )}
-
-            {state.user.user?.role == "admin" ? (
-              <>
+            <div className="d-flex ">
+              {state.user.user?.role == "admin" ? (
+                <>
+                  <button
+                    onClick={deleteTrip}
+                    className="btn btn-danger text-light  px-5 py-2  fw-bold mt-4"
+                  >
+                    Delete
+                  </button>
+                </>
+              ) : (
                 <button
-                  onClick={deleteTrip}
-                  className="btn btn-danger text-light  px-5 py-2  fw-bold mt-4"
+                  onClick={handleTransaction}
+                  className="btn btn-warning text-light px-4 py-2  fw-bold mt-4"
+                  disabled={
+                    trip?.quota_filled === trip?.quota ||
+                    state.isLogin === false
+                      ? true
+                      : false
+                  }
                 >
-                  Delete
+                  {state.isLogin === false
+                    ? "You Must Login"
+                    : trip?.quota_filled === trip?.quota
+                    ? "Sold Out"
+                    : "Book Now"}
                 </button>
-              </>
-            ) : (
-              <button
-                onClick={handleTransaction}
-                className="btn btn-warning text-light px-4 py-2  fw-bold mt-4"
-                disabled={
-                  trip?.quota_filled === trip?.quota || state.isLogin === false
-                    ? true
-                    : false
-                }
+              )}
+              <Button
+                onClick={() => addWishlist(trip.id)}
+                className="btn btn-success ms-2 shadow-none text-light   fw-bold mt-4"
               >
-                {state.isLogin === false
-                  ? "You Must Login"
-                  : trip?.quota_filled === trip?.quota
-                  ? "Sold Out"
-                  : "Book Now"}
-              </button>
-            )}
+                <img
+                  style={{ width: "24px", color: "#fff", marginRight: "2px" }}
+                  src="/assets/hear.png"
+                  alt=""
+                ></img>
+                Wishlist
+              </Button>
+            </div>
           </div>
           <Footer />
+          <Toaster />
         </Container>
       </div>
     </>
