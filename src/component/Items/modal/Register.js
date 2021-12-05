@@ -161,7 +161,7 @@ const Register = ({ registerModal, closeModalRegister, openModalLogin }) => {
               </Button>
               <small className="text-center">
                 Have an account ? click{" "}
-                <a href onClick={openModalLogin}>
+                <a href="" onClick={openModalLogin}>
                   Here
                 </a>
               </small>
