@@ -2,7 +2,6 @@ import { Link } from "react-router-dom";
 import RupiahFormat from "../../../utils/RupiahFormat";
 
 const GroupTour = ({ trip, search }) => {
-  console.log(trip);
   return (
     <div>
       <div className="container-fluid container-group  d-flex gap-5 flex-wrap ">

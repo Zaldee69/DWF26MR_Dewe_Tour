@@ -80,7 +80,7 @@ function Navbar() {
               />
             </li>
             <li>
-              <a className="btn-two" onClick={openModalRegister} href="">
+              <a className="btn-two" onClick={openModalRegister} href="#">
                 Register
               </a>
             </li>

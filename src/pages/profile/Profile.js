@@ -123,7 +123,7 @@ export const Profile = () => {
           </div>
         </Container>
         <h1 className="history-trip">History Trip</h1>
-        {history.map((el, i) => {
+        {history?.map((el, i) => {
           return (
             <TripCard
               destination={el.trips?.title}

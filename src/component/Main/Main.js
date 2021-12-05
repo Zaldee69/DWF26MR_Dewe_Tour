@@ -19,7 +19,6 @@ function Main() {
       const response = await API.get("/trip");
       // Store trip data to useState variabel
       setTrip(response.data.data);
-      console.log(trip);
     } catch (error) {
       console.log(error);
     }
