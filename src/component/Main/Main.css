@@ -70,8 +70,9 @@ body {
   background-color: #f1f1f1;
 }
 
-.title-container {
+.admin-title-container {
   width: 77.8%;
+  border-bottom: 1px solid #ffc107;
 }
 
 .admin-style {

@@ -45,7 +45,7 @@ function Main() {
         ></img>
         <img className="palm-img" src="assets/palm.png" alt="hibiscus"></img>
         {state.user.user?.role === "admin" ? (
-          <div className="title-container d-flex mx-auto justify-content-between">
+          <div className="admin-title-container d-flex mx-auto justify-content-between">
             <h1 className="income-trip">Income Trip</h1>
             <Link to="/addtrip">
               <button className="btn add-btn btn btn-warning text-light fw-bold">
