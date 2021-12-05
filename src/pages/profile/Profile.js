@@ -11,10 +11,12 @@ import Envelope from "../../img/envelope.png";
 import Call from "../../img/phone.png";
 import Map from "../../img/map.png";
 import Button from "@restart/ui/esm/Button";
+import toast, { Toaster } from "react-hot-toast";
 
 export const Profile = () => {
   const { state } = useContext(AuthContext);
   const [history, setHistory] = useState([]);
+  const [preview, setPreview] = useState("");
   const [form, setForm] = useState({
     image: "",
   });
@@ -33,26 +35,34 @@ export const Profile = () => {
     setForm({
       image: e.target.files,
     });
+    if (e.target.type === "file") {
+      let url = URL.createObjectURL(e.target.files[0]);
+      setPreview(url);
+    }
   };
 
-  const onSubmitHandler = async (e) => {
-    try {
-      e.preventDefault();
-      const config = {
-        headers: {
-          "Content-type": "multipart/form-data",
-        },
-      };
+  const onSubmitHandler = (e) => {
+    e.preventDefault();
+    const config = {
+      headers: {
+        "Content-type": "multipart/form-data",
+      },
+    };
 
-      const formData = new FormData();
+    const formData = new FormData();
 
-      formData.set("image", form.image[0], form.image[0].name);
+    formData.set("image", form.image[0], form.image[0].name);
 
-      await API.patch("/users", formData, config);
-    } catch (error) {
-      console.log(error);
-    }
-    window.location.reload();
+    toast.promise(
+      API.patch("/users", formData, config).then(() => {
+        window.location.reload();
+      }),
+      {
+        loading: "Loading",
+        success: "Edit Profile Success",
+        error: "Edit Profile Failed",
+      }
+    );
   };
 
   useEffect(() => {
@@ -111,7 +121,15 @@ export const Profile = () => {
               ></img>
             </label>
 
-            <img alt="" className="profile" src={state.user.user?.image}></img>
+            {preview ? (
+              <img alt="" className="profile" src={preview}></img>
+            ) : (
+              <img
+                alt=""
+                className="profile"
+                src={state.user.user?.image}
+              ></img>
+            )}
 
             <Button
               className="btn btn-warning text-light fw-bold"
@@ -144,7 +162,7 @@ export const Profile = () => {
             />
           );
         })}
-
+        <Toaster />
         <Footer />
       </Container>
     </div>

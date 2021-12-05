@@ -35,6 +35,7 @@ function DetailTrip() {
       const response = await API.get("/trip/" + id);
       // Store trip data to useState variabel
       setTrip(response.data);
+      console.log(response.data);
     } catch (error) {}
   };
 

@@ -5,12 +5,16 @@ import "./Wishlist.css";
 import { API } from "../../config/api";
 import { AuthContext } from "../../context/AuthContextProvider";
 import RupiahFormat from "../../utils/RupiahFormat";
+import toast, { Toaster } from "react-hot-toast";
 
 const Wishlist = () => {
   const [counter, setCounter] = useState(0);
   const [data, setData] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
   const { state } = useContext(AuthContext);
+
+  const successNotify = (str) => toast.success(str);
+  const loadingNotify = () => toast.loading("Waiting...");
 
   const getWishlist = () => {
     API.get("/wishlist").then((res) => {
@@ -30,7 +34,7 @@ const Wishlist = () => {
     });
   };
 
-  const bookingHandler = (id, price) => {
+  const bookingHandler = (id, price, index) => {
     const config = {
       headers: {
         "Content-type": "application/json",
@@ -45,10 +49,14 @@ const Wishlist = () => {
     };
 
     const quota = {
-      quota_filled: data.quota_filled + counter,
+      quota_filled: data[index].quota_filled + counter,
     };
+    loadingNotify();
+    API.post("/transaction", bookingData, config).then((res) => {
+      successNotify("Booking trip success");
+      setCounter(0);
+    });
 
-    API.post("/transaction", bookingData, config);
     API.patch("/trip/" + id, quota, config);
   };
 
@@ -108,7 +116,7 @@ const Wishlist = () => {
                       ></img>
                     </div>
                     <Button
-                      onClick={() => bookingHandler(item.id, item.price)}
+                      onClick={() => bookingHandler(item.id, item.price, index)}
                       className=" shadow-none rounded bg-transparent border-warning text-warning fw-bold flex-grow-1"
                     >
                       Book Now
@@ -118,6 +126,7 @@ const Wishlist = () => {
               );
             })}
         </div>
+        <Toaster />
       </Container>
     </div>
   );

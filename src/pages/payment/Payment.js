@@ -10,9 +10,11 @@ import toast, { Toaster } from "react-hot-toast";
 function Payment() {
   const [transaction, setTransaction] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
+
   const { id } = useParams();
 
   const failedNotify = (str) => toast.error(str);
+  const successNotify = (str) => toast.success(str);
 
   // Fetching trip data from database
   const getTransaction = async () => {
@@ -28,26 +30,31 @@ function Payment() {
     }
   };
 
-  const paymentHandle = async ({ id, form }) => {
+  const paymentHandle = ({ id, form }) => {
     if (form.image === "") {
       failedNotify("You must upload payment proof");
     } else {
-      try {
-        const config = {
-          headers: {
-            "Content-type": "multipart/form-data",
-          },
-        };
+      const config = {
+        headers: {
+          "Content-type": "multipart/form-data",
+        },
+      };
 
-        const formData = new FormData();
+      const formData = new FormData();
 
-        formData.append("image", form.image[0], form.image[0].name);
-        formData.append("status", "Pending");
-        await API.patch("/transaction/" + id, formData, config);
-        getTransaction();
-      } catch (error) {
-        console.log(error);
-      }
+      formData.append("image", form.image[0], form.image[0].name);
+      formData.append("status", "Pending");
+
+      toast.promise(
+        API.patch("/transaction/" + id, formData, config).then(() =>
+          getTransaction()
+        ),
+        {
+          loading: "Loading",
+          success: "Payment Success ",
+          error: "Payment Failed",
+        }
+      );
     }
   };
 

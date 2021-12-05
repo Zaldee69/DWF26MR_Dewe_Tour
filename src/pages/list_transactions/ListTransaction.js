@@ -26,7 +26,6 @@ const ListTransaction = () => {
     try {
       const response = await API.get("/user-transaction/" + id);
       setUserTransaction(response.data.data);
-      console.log(userTransaction.trips);
     } catch (error) {
       console.log(error);
     }
@@ -112,7 +111,16 @@ const ListTransaction = () => {
                     <td>{el.users.fullName}</td>
                     <td>{el.trips.title}</td>
 
-                    <td>{el.attachment}</td>
+                    <td>
+                      <a
+                        href={el.attachment}
+                        className="text-primary fw-light fs-6"
+                        target="_blank"
+                        rel="noreferrer"
+                      >
+                        {el.attachment}
+                      </a>
+                    </td>
                     <td
                       className={` ${
                         el.status == "Pending"
