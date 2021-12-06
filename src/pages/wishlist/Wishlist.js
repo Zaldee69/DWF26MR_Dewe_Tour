@@ -61,7 +61,7 @@ const Wishlist = () => {
   };
 
   return (
-    <div>
+    <Container fluid>
       <Navbar />
       <Container className="wishlist-container mx-auto">
         <div className="d-inline-flex gap-1 title-container ">
@@ -128,7 +128,7 @@ const Wishlist = () => {
         </div>
         <Toaster />
       </Container>
-    </div>
+    </Container>
   );
 };
 
