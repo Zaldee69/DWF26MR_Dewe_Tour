@@ -146,6 +146,7 @@ const ListTransaction = () => {
                 destination={userTransaction.trips?.title}
                 transport={userTransaction.trips?.transportation}
                 show={modalShow}
+                total={userTransaction?.total}
                 day={userTransaction.trips?.day}
                 image={userTransaction?.attachment}
                 night={userTransaction.trips?.night}

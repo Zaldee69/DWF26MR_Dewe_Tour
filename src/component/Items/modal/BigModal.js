@@ -48,6 +48,7 @@ function BigModal(props) {
           qty={props.qty}
           accomodation={props.accomodation}
           attachment={props.attachment}
+          total={props.total}
         />
       </Modal.Body>
       <Modal.Footer>
