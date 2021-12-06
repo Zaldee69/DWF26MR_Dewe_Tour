@@ -99,7 +99,7 @@ const ListTransaction = () => {
                 <th>Users</th>
                 <th>Trip</th>
                 <th>Proof Of Payment</th>
-                <th>Payment Status</th>
+                <th>Status</th>
                 <th>Action</th>
               </tr>
             </thead>
