@@ -40,10 +40,14 @@ function AdminDropdown() {
         <img alt={Polygon} className="polygon " src={Polygon} />
 
         <div className="small-profile position-relative">
-          <img src={state.user.user?.image} alt="Profile" />
-          {transactions?.length !== 0 && (
-            <p className="count-1">{transactions?.length}</p>
-          )}
+          <img
+            src={
+              !state.user.user?.image
+                ? "https://res.cloudinary.com/dpfsxu9uk/image/upload/v1638738891/dewe_tour/blank-profile-picture-973460_yqiiwe.png"
+                : state.user.user?.image
+            }
+            alt="Profile"
+          />
         </div>
         <div className="dropdown-content py-3 px-3">
           <div className="desc d-flex flex-column gap-4">
