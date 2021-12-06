@@ -14,7 +14,6 @@ function Payment() {
   const { id } = useParams();
 
   const failedNotify = (str) => toast.error(str);
-  const successNotify = (str) => toast.success(str);
 
   // Fetching trip data from database
   const getTransaction = async () => {
@@ -24,6 +23,7 @@ function Payment() {
       // Store trip data to useState variabel
       setTransaction(response.data.data);
       setIsLoading(true);
+      console.log(response.data);
     } catch (error) {
       setIsLoading(false);
       console.log(error);
@@ -81,32 +81,38 @@ function Payment() {
                   ></img>
                 </div>
               )
-            : transaction?.map((el, i) => {
-                return (
-                  <div key={i} className="position-relative pb-5">
-                    <TripCard
-                      className="mt-5"
-                      destination={el.trips?.title}
-                      transport={el.trips?.transportation}
-                      day={el.trips?.day}
-                      image={el.attachment}
-                      night={el.trips?.day}
-                      price={el.trips?.price}
-                      date={el.trips?.dateTrip}
-                      status={el.status}
-                      name={el.users.fullName}
-                      gender={el.users.gender}
-                      phone={el.users.phone}
-                      country={el.trips?.country.name}
-                      qty={el.counterQty}
-                      accomodation={el.trips?.accomodation}
-                      id={el.id}
-                      total={el.total}
-                      payment={paymentHandle}
-                    />
-                  </div>
-                );
-              }))}
+            : transaction
+                .filter((el) => {
+                  if (el.status === "Waiting Payment") {
+                    return el;
+                  }
+                })
+                .map((el, i) => {
+                  return (
+                    <div key={i} className="position-relative pb-5">
+                      <TripCard
+                        className="mt-5"
+                        destination={el.trips?.title}
+                        transport={el.trips?.transportation}
+                        day={el.trips?.day}
+                        image={el.attachment}
+                        night={el.trips?.day}
+                        price={el.trips?.price}
+                        date={el.trips?.dateTrip}
+                        status={el.status}
+                        name={el.users.fullName}
+                        gender={el.users.gender}
+                        phone={el.users.phone}
+                        country={el.trips?.country.name}
+                        qty={el.counterQty}
+                        accomodation={el.trips?.accomodation}
+                        id={el.id}
+                        total={el.total}
+                        payment={paymentHandle}
+                      />
+                    </div>
+                  );
+                }))}
 
         <Toaster />
       </div>
