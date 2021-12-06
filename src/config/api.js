@@ -3,7 +3,7 @@ import axios from "axios";
 // Create base URL API
 export const API = axios.create({
   baseURL:
-    "https://dewe-tour-backend.herokuapp.com/api/v1/login" ||
+    "https://dewe-tour-backend.herokuapp.com/api/v1/" ||
     "http://localhost:5000/api/v1/",
 });
 
