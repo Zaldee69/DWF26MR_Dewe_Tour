@@ -10,10 +10,11 @@ Link Demo : https://dewe-tours.netlify.app
     
 ## Technologies Using
    <ul>
-    <li>apa</li>
-     <li>auu</li>
-     <li>hmm</li>
-     <li>aaa</li>
+    <li>React JS</li>
+     <li>Express JS</li>
+     <li>Node JS</li>
+     <li>MySQL</li>
+     <li>Sequelize</li>
     </ul>
 
 
