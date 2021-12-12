@@ -1,4 +1,4 @@
-## Dewe Tour
+<h1>Dewe Tours</h1>
 
 Link Demo : https://dewe-tours.netlify.app
 
@@ -9,7 +9,7 @@ Link Demo : https://dewe-tours.netlify.app
   
     
     
-## Technologies Using
+<h1>Technologies Using</h1>
    <ul>
     <li>React JS</li>
      <li>Express JS</li>
