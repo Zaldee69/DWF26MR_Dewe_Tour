@@ -9,7 +9,7 @@ Link Demo : https://dewe-tours.netlify.app
   
     
     
-<h1>Technologies Using</h1>
+<h3>Technologies Using</h3>
    <ul>
     <li>React JS</li>
      <li>Express JS</li>
