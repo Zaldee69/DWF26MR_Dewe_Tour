@@ -2,7 +2,7 @@
 
 Link Demo : <a href="https://dewe-tours.netlify.app">Click Here</a>
 
-*if you want login as admin you can use this account : </br>
+*if you want login as admin you can use this account :
    <p>email : muhammadrizaldy60@gmail.com</p>
    <p>pass : 123456</p>
   
