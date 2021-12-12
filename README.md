@@ -1,8 +1,8 @@
 <h1>Dewe Tours</h1>
 
-Link Demo : <a href="https://dewe-tours.netlify.app">Click Here</a>
+Link Demo : <a target="blank" href="https://dewe-tours.netlify.app">Click Here</a>
 
-*if you want login as admin you can use this account :
+<p style="font-style : italic;">if you want login as admin you can use this account :</p>
    <p>email : muhammadrizaldy60@gmail.com</p>
    <p>pass : 123456</p>
   
