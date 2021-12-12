@@ -4,7 +4,7 @@ Link Demo : https://dewe-tours.netlify.app
 
 
 *if you want login as admin you can use this account : </br>
-    email : "muhammadrizaldy60@gmail".com
+   <p>email : "muhammadrizaldy60@gmail".com</p>
    </br> pass : 123456
     
     
